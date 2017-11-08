@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component , PureComponent} from 'react';
 import {View , StyleSheet} from 'react-native';
 import QuestionStatus from "../../../enum/QuestionStatus";
 import String from '../../../res/string/String';
@@ -7,7 +7,7 @@ import QuestionText from "./QuestionText";
 import QuestionActions from "./QuestionActions";
 import Divider from './../general/Divider';
 
-export default class Question extends Component
+export default class Question extends PureComponent
 {
     constructor(props)
     {
