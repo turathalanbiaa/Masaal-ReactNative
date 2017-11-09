@@ -25,6 +25,7 @@ export default class Question extends PureComponent
                 {
                     question.status === QuestionStatus.APPROVED ? this.renderAnswer() : null
                 }
+                <QuestionActions videoLink={question.videoLink} externalLink={question.externalLink}/>
             </View>
 
         );
@@ -37,7 +38,6 @@ export default class Question extends PureComponent
             <View>
                 <Divider/>
                 <QuestionText style={styles.topDownSpace} content={question.answer}  title={String.the_answer}/>
-                <QuestionActions videoLink={question.videoLink} externalLink={question.externalLink}/>
             </View>
         )
     }
@@ -45,7 +45,11 @@ export default class Question extends PureComponent
 
 const styles = StyleSheet.create({
     container :{
-        padding : 8
+        padding : 8,
+        paddingBottom : 2,
+        backgroundColor : '#FFF' ,
+        marginBottom : 20,
+        marginTop : 8
     },
     topDownSpace : {
         marginTop : 8 , marginBottom : 8

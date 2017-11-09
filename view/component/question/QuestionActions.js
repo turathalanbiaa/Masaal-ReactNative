@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-import {View , StyleSheet} from 'react-native';
+import {View , StyleSheet ,I18nManager} from 'react-native';
 import {Button , Icon} from 'native-base';
 
 export default class QuestionActions extends Component
@@ -8,16 +8,16 @@ export default class QuestionActions extends Component
     {
         return (
             <View style={styles.container}>
-                <Button light>
+                <Button small transparent>
                     <Icon name='md-image' />
                 </Button>
-                <Button style={styles.button}  light>
+                <Button style={styles.button} transparent small>
                     <Icon name='md-share' />
                 </Button>
-                <Button style={styles.button}  light>
+                <Button style={styles.button} transparent small>
                     <Icon name='logo-youtube' />
                 </Button>
-                <Button style={styles.button}  light>
+                <Button style={styles.button} transparent small>
                     <Icon name='md-link' />
                 </Button>
             </View>
@@ -28,9 +28,13 @@ export default class QuestionActions extends Component
 const styles = StyleSheet.create({
     container : {
         flex : 1 ,
-        flexDirection : 'row'
+        flexDirection : 'row' ,
+        backgroundColor : '#EEE',
+        marginRight : -8,
+        marginLeft : -8,
+        padding : 8
     } ,
     button : {
-        marginRight : 5 , marginLeft : 5
+
     }
 });

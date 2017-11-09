@@ -1,13 +1,18 @@
 import React , {Component} from 'react';
-import {StyleSheet , View , Text , Image} from 'react-native';
+import {StyleSheet , View , Text , Image , I18nManager} from 'react-native';
 import TimeUtils from './../../../utils/time/TimeUtils';
+import String from './../../../res/string/String';
 
 export default class QuestionHeader extends Component
 {
 
     render()
     {
-        const time = TimeUtils.timeSince(new Date(this.props.time));
+
+        let name = this.props.name;
+        if (name === null || name.trim() === "")
+            name = String.unknown_user;
+        name = name.substr(0 , 19);
 
         return (
             <View style={styles.container}>
@@ -18,10 +23,10 @@ export default class QuestionHeader extends Component
 
                 <View style={styles.infoContainer}>
 
-                    <Text style={styles.primaryText}>{this.props.name}</Text>
+                    <Text style={styles.primaryText}>{name}</Text>
 
                     <View style={styles.infoFooterContainer}>
-                        <Text style={styles.secondaryText}>{time}</Text>
+                        <Text style={styles.secondaryText}>{this.formattedTime()}</Text>
                         <Text style={styles.secondaryText}>{this.props.category}</Text>
                     </View>
 
@@ -29,6 +34,18 @@ export default class QuestionHeader extends Component
 
             </View>
         );
+    }
+
+    formattedTime = () =>
+    {
+        let time = TimeUtils.timeSince(new Date(this.props.time));
+        time = time.replace("$years$" , String.year);
+        time = time.replace("$month$" , String.month);
+        time = time.replace("$days$" , String.day);
+        time = time.replace("$hours$" , String.hour);
+        time = time.replace("$minutes$" , String.minute);
+        time = time.replace("$seconds$" , String.second);
+        return time;
     }
 }
 
@@ -49,12 +66,15 @@ const styles = StyleSheet.create({
     image :{
         width : 32 ,
         height : 32 ,
-        marginLeft : 8 , marginRight : 8
+        marginLeft : I18nManager.isRTL ? 8 : 0,
+        marginRight : I18nManager.isRTL ? 0 : 8
     },
     primaryText : {
-        fontSize : 16
+        fontSize : 16 ,
+        fontFamily : 'JF Flat'
     },
     secondaryText : {
-        fontSize : 12
+        fontSize : 12,
+        fontFamily : 'JF Flat'
     }
 });

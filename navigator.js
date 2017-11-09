@@ -13,6 +13,6 @@ const AppNavigation = StackNavigator({
     MyQuestions : {screen : MyQuestionsScreen} ,
     SendQuestion : {screen : SendQuestionScreen} ,
     Settings : {screen : SettingsScreen}
-});
+}, {navigationOptions : { header: null }});
 
 export default AppNavigation;

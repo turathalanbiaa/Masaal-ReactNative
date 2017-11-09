@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-import {View , Text , StyleSheet} from 'react-native';
+import {View , Text , StyleSheet , Platform} from 'react-native';
 
 export default class QuestionText extends Component
 {
@@ -22,10 +22,12 @@ const styles = StyleSheet.create({
     primaryText: {
         marginBottom : 8,
         fontSize : 16 ,
-        color : '#2B2B2B'
+        color : '#2B2B2B' ,
+        fontFamily : Platform.OS ==="ios" ? 'CoconNextArabic-Light' : 'cocon'
     },
     paragraph : {
         fontSize: 14 ,
-        color : '#777777'
+        color : '#777777' ,
+        fontFamily : 'JF Flat'
     }
 });
