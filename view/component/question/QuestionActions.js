@@ -8,7 +8,7 @@ export default class QuestionActions extends Component
     {
         return (
             <View style={styles.container}>
-                <Button small transparent>
+                <Button small transparent onPress={this.props.onCapturePressed}>
                     <Icon name='md-image' />
                 </Button>
                 <Button style={styles.button} transparent small>
