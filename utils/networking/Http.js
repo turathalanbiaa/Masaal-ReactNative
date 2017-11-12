@@ -17,7 +17,17 @@ export default class Http
             }, timeout);
 
             fetch(url, fetchOption)
-                .then(response => response.json())
+                .then(response =>
+                {
+                    console.log(response);
+                    if (response.status === 200)
+                        return response.json();
+                    else
+                    {
+                        console.log(response.json());
+                        reject('RESPONSE_FAIL')
+                    }
+                })
                 .then(async (response) =>
                 {
                     clearTimeout(timeoutId);
@@ -26,7 +36,6 @@ export default class Http
                 .catch((e) =>
                 {
                     clearTimeout(timeoutId);
-                    console.log(e);
                     reject(e);
                 });
         });

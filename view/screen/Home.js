@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import {View, FlatList, I18nManager} from 'react-native';
+import {View, I18nManager} from 'react-native';
 import {connect} from 'react-redux';
-import Question from './../component/question/Question';
-import {Container, Header, Left, Button, Icon, Body, Title, Right, Text} from 'native-base';
+import String from './../../res/string/String';
+import {Container} from 'native-base';
 import {fetchRecentQuestionsWithAnnouncements} from './../../redux/actions/questionActions';
+import QuestionList from "../component/question/QuestionList";
+import Header from "../component/general/header/Header";
 
 class Home extends Component
 {
@@ -15,70 +17,53 @@ class Home extends Component
     componentDidMount()
     {
         I18nManager.forceRTL(false);
-        this.props.dispatch(fetchRecentQuestionsWithAnnouncements(0 , this.props.requestId));
+        this.props.dispatch(fetchRecentQuestionsWithAnnouncements(0, this.props.requestId));
     }
 
     _onRefresh = () =>
     {
-        this.props.dispatch(fetchRecentQuestionsWithAnnouncements(0 , this.props.requestId));
+
+        this.props.dispatch(fetchRecentQuestionsWithAnnouncements(0, this.props.requestId));
     };
 
     _onEndReached = () =>
     {
         if (this.props.fetching || this.props.fetchingMore)
+        {
             return;
+        }
 
-        this.props.dispatch(fetchRecentQuestionsWithAnnouncements(this.props.questions.length , this.props.requestId))
+        this.props.dispatch(fetchRecentQuestionsWithAnnouncements(this.props.questions.length, this.props.requestId))
     };
 
+    _onDrawer = () =>
+    {
+
+    };
 
     render()
     {
         return (
 
             <Container>
-                <Header>
-                    <Left>
-                        <Button transparent>
-                            <Icon name='menu'/>
-                        </Button>
-                    </Left>
-                    <Body>
-                    <Title>Header</Title>
-                    </Body>
-                    <Right/>
-                </Header>
+
+                <Header title={String.home} onDrawer={this._onDrawer}/>
 
                 <View style={{flex: 1}}>
 
-                    {
-                        this.props.questions.length === 0 ? <Text>No Questions</Text> : null
-                    }
 
-                    {
-                        this.props.errorFetching? <Text>Error</Text> : null
-                    }
-
-                    <FlatList
-                        data={this.props.questions}
-
-                        renderItem={(item) =>
-                        {
-                            return <Question question={item.item}/>;
-                        }}
-
-                        keyExtractor={item => item.id}
-                        ItemSeparatorComponent={() => null}
-                        ListHeaderComponent={() => null}
-                        ListFooterComponent={() => <Button onPress={() => this.props.dispatch(fetchRecentQuestionsWithAnnouncements(this.props.questions.length))}><Text>Load More</Text></Button>}
+                    <QuestionList
+                        questions={this.props.questions}
                         refreshing={this.props.fetching}
                         onRefresh={this._onRefresh}
                         onEndReached={this._onEndReached}
-                        onEndThreshold={0}
+                        firstError={this.props.fetchingError && this.props.questions.length === 0}
+                        moreError={this.props.fetchingError && this.props.questions.length > 0}
                     />
 
 
                 </View>
+
             </Container>
 
         );
@@ -90,9 +75,9 @@ export default connect((state) =>
 {
     return {
         fetching: state.question.fetching,
-        errorFetching: state.question.errorFetching,
+        fetchingError: state.question.fetchingError,
         fetchingMore: state.question.fetchingMore,
-        questions: state.question.questions ,
-        requestId : state.question.requestId
+        questions: state.question.questions,
+        requestId: state.question.requestId
     }
 })(Home);

@@ -10,7 +10,12 @@ let String = new LocalizedStrings({
         day : "يوم",
         hour : "ساعة",
         minute : "دقيقة",
-        second : "ثانية"
+        second : "ثانية",
+        home : "الرئيسية",
+        error_while_loading : 'حصلت مشكلة خلال تحميل البيانات',
+        empty_result : 'لا توجد بيانات',
+        loading_questions : 'جاري تحميل الاسئلة...',
+        reload : "اعادة تحميل"
     },
     en: {
         the_question: 'Question : ',
@@ -21,7 +26,12 @@ let String = new LocalizedStrings({
         day : "day",
         hour : "hour",
         minute : "minute",
-        second : "second"
+        second : "second" ,
+        home : "Home",
+        error_while_loading : 'Error Happened While Loading',
+        empty_result : 'No Result',
+        loading_questions : 'Loading Questions...',
+        reload : 'Reload'
     },
     fr : {
 

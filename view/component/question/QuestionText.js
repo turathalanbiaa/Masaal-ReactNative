@@ -8,7 +8,7 @@ export default class QuestionText extends Component
         return (
             <View style={this.props.style}>
                 <Text style={styles.primaryText}>{this.props.title}</Text>
-                <Text style={styles.paragraph}>{this.props.content}</Text>
+                <Text style={styles.paragraph}>{this.props.content.trim()}</Text>
             </View>
         );
     }
@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
     paragraph : {
         fontSize: 14 ,
         color : '#777777' ,
-        fontFamily : 'JF Flat'
+        fontFamily : 'JF Flat',
     }
 });

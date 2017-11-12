@@ -1,5 +1,5 @@
 import React, {Component , PureComponent} from 'react';
-import {View , StyleSheet} from 'react-native';
+import {View , StyleSheet , Image , Dimensions} from 'react-native';
 import QuestionStatus from "../../../enum/QuestionStatus";
 import String from '../../../res/string/String';
 import QuestionHeader from "./QuestionHeader";
@@ -7,6 +7,9 @@ import QuestionText from "./QuestionText";
 import QuestionActions from "./QuestionActions";
 import Divider from './../general/Divider';
 import ViewShot from 'react-native-view-shot';
+import RNFS from 'react-native-fs';
+import Link from './../../../constant/Link';
+
 
 export default class Question extends PureComponent
 {
@@ -21,6 +24,13 @@ export default class Question extends PureComponent
         this.viewShot.capture().then(uri =>
         {
             console.log("image saved ", uri);
+
+            let destination = RNFS.DocumentDirectoryPath + "/" + this.props.question.id + ".jpg";
+            RNFS.moveFile(uri , destination).then(() =>
+            {
+                console.log('moved to : ' + destination);
+            });
+
         });
     };
 
@@ -47,10 +57,14 @@ export default class Question extends PureComponent
     renderAnswer = () =>
     {
         const {question} = this.props;
+        const {width} = Dimensions.get('window');
         return (
             <View>
                 <Divider/>
                 <QuestionText style={styles.topDownSpace} content={question.answer}  title={String.the_answer}/>
+                {
+                    (question.image !== null && question.image.trim() !== "") && <Image source={{uri : Link.IMAGES + question.image}} style={{width : '100%' , height : width*0.7 , marginBottom : 8}}/>
+                }
             </View>
         )
     }
