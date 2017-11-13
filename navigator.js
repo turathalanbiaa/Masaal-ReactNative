@@ -8,10 +8,15 @@ import MyQuestionsScreen from './view/screen/MyQuestions';
 import SettingsScreen from './view/screen/Settings';
 
 const AppNavigation = StackNavigator({
-    Home : {screen : HomeScreen},
-    Posts : {screen : PostsScreen} ,
+    FeqhQuestions : {screen : HomeScreen},
+    AqaedQuestions : {screen : HomeScreen},
+    FeqhPosts : {screen : PostsScreen} ,
+    AqaedPosts : {screen : PostsScreen} ,
     MyQuestions : {screen : MyQuestionsScreen} ,
     SendQuestion : {screen : SendQuestionScreen} ,
+    Search : {screen : SendQuestionScreen} ,
+    Bookmark : {screen : SendQuestionScreen} ,
+    Tags : {screen : SendQuestionScreen} ,
     Settings : {screen : SettingsScreen}
 }, {navigationOptions : { header: null }});
 

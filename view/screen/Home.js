@@ -26,7 +26,6 @@ class Home extends Screen
 
     _onRefresh = () =>
     {
-
         this.props.dispatch(fetchRecentQuestionsWithAnnouncements(0, this.props.requestId));
     };
 

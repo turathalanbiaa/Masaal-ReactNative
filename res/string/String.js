@@ -19,6 +19,18 @@ let String = new LocalizedStrings({
         app_name : "الاجوبة المسيرة" ,
         announcement : 'اعلان مثبت' ,
         you_cannot_save_more_than_500_questions : 'لا يمكنك حفظ اكثر من ٥٠٠ سؤال',
+
+        feqh_questions : "الاسئلة الافقهية",
+        aqaed_questions : "الاسئلة العقائدية",
+        feqh_posts : "المنشورات الافقهية",
+        aqaed_posts : "المنشورات العقائدية",
+        send_question : "ارسال سؤال",
+        my_questions : "اسئلتي",
+        search : "بحث",
+        bookmark : "المحفوضات",
+        tags : "الاستفتائات",
+        settings : "الاعدادات",
+
     },
     en: {
         the_question: 'Question : ',
@@ -38,6 +50,19 @@ let String = new LocalizedStrings({
         app_name:"Simple Answers" ,
         announcement : 'Fixed Announcement',
         you_cannot_save_more_than_500_questions : 'You cannot save more than 500 questions',
+
+
+        feqh_questions : "Feqh Questions",
+        aqaed_questions : "Aqaed Questions",
+        feqh_posts : "Feqh Posts",
+        aqaed_posts : "Aqaed Posts",
+        send_question : "Send Question",
+        my_questions : "My Questions",
+        search : "Search",
+        bookmark : "Bookmark",
+        tags : "Tags",
+        settings : "Settings",
+
     },
     fr : {
 
