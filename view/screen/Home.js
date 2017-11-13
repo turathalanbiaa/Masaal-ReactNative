@@ -2,13 +2,17 @@ import React, {Component} from 'react';
 import {View, I18nManager} from 'react-native';
 import {connect} from 'react-redux';
 import String from './../../res/string/String';
-import {Container} from 'native-base';
+
 import {fetchRecentQuestionsWithAnnouncements} from './../../redux/actions/questionActions';
 import QuestionList from "../component/question/QuestionList";
-import Header from "../component/general/header/Header";
+import {Drawer ,  List, ListItem , Text} from 'native-base';
+import AnnouncementList from "../component/announcement/AnnouncementList";
+import Screen from './Screen';
 
-class Home extends Component
+
+class Home extends Screen
 {
+
     constructor(props)
     {
         super(props);
@@ -36,38 +40,33 @@ class Home extends Component
         this.props.dispatch(fetchRecentQuestionsWithAnnouncements(this.props.questions.length, this.props.requestId))
     };
 
-    _onDrawer = () =>
-    {
 
-    };
-
-    render()
+    renderContent()
     {
         return (
-
-            <Container>
-
-                <Header title={String.home} onDrawer={this._onDrawer}/>
-
-                <View style={{flex: 1}}>
+            <View style={{flex: 1}}>
 
 
-                    <QuestionList
-                        questions={this.props.questions}
-                        refreshing={this.props.fetching}
-                        onRefresh={this._onRefresh}
-                        onEndReached={this._onEndReached}
-                        firstError={this.props.fetchingError && this.props.questions.length === 0}
-                        moreError={this.props.fetchingError && this.props.questions.length > 0}
-                    />
+                <QuestionList
+                    questions={this.props.questions}
+                    refreshing={this.props.fetching}
+                    header={<AnnouncementList announcements={this.props.announcements}/>}
+                    onRefresh={this._onRefresh}
+                    onEndReached={this._onEndReached}
+                    firstError={this.props.fetchingError && this.props.questions.length === 0}
+                    moreError={this.props.fetchingError && this.props.questions.length > 0}
+                />
 
 
-                </View>
-
-            </Container>
-
-        );
+            </View>
+        )
     }
+
+    title = () =>
+    {
+        return String.home;
+    }
+
 
 }
 
@@ -78,6 +77,7 @@ export default connect((state) =>
         fetchingError: state.question.fetchingError,
         fetchingMore: state.question.fetchingMore,
         questions: state.question.questions,
+        announcements: state.question.announcements ,
         requestId: state.question.requestId
     }
 })(Home);

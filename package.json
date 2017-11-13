@@ -13,6 +13,7 @@
 		"react-native": "0.49.3",
 		"react-native-fs": "^2.8.5",
 		"react-native-localization": "^0.2.1",
+		"react-native-share": "^1.0.23",
 		"react-native-view-shot": "^2.1.1",
 		"react-navigation": "^1.0.0-beta.19",
 		"react-redux": "^5.0.6",

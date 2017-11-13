@@ -21,7 +21,11 @@ export default class QuestionActions extends Component
         return (
             <View style={styles.container}>
 
-                <Button style={styles.button} transparent small>
+                <Button onPress={this.props.onBookmarkPressed} style={styles.button} transparent small>
+                    <Icon name='md-bookmark' />
+                </Button>
+
+                <Button onPress={this.props.onSharePressed} style={styles.button} transparent small>
                     <Icon name='md-share' />
                 </Button>
 

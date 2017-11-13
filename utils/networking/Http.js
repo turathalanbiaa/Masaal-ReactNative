@@ -19,7 +19,6 @@ export default class Http
             fetch(url, fetchOption)
                 .then(response =>
                 {
-                    console.log(response);
                     if (response.status === 200)
                         return response.json();
                     else

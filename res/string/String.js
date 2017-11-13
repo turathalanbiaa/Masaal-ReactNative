@@ -15,7 +15,10 @@ let String = new LocalizedStrings({
         error_while_loading : 'حصلت مشكلة خلال تحميل البيانات',
         empty_result : 'لا توجد بيانات',
         loading_questions : 'جاري تحميل الاسئلة...',
-        reload : "اعادة تحميل"
+        reload : "اعادة تحميل",
+        app_name : "الاجوبة المسيرة" ,
+        announcement : 'اعلان مثبت' ,
+        you_cannot_save_more_than_500_questions : 'لا يمكنك حفظ اكثر من ٥٠٠ سؤال',
     },
     en: {
         the_question: 'Question : ',
@@ -31,7 +34,10 @@ let String = new LocalizedStrings({
         error_while_loading : 'Error Happened While Loading',
         empty_result : 'No Result',
         loading_questions : 'Loading Questions...',
-        reload : 'Reload'
+        reload : 'Reload',
+        app_name:"Simple Answers" ,
+        announcement : 'Fixed Announcement',
+        you_cannot_save_more_than_500_questions : 'You cannot save more than 500 questions',
     },
     fr : {
 

@@ -3,6 +3,7 @@ import {FlatList , View , Image , StyleSheet , Text} from 'react-native';
 import {Button , Text as NBText} from 'native-base'
 import Question from './Question';
 import String from './../../../res/string/String';
+
 export default class QuestionList extends Component
 {
 
@@ -13,7 +14,6 @@ export default class QuestionList extends Component
 
     render()
     {
-        console.log(this.props.refreshing);
 
         return (
 
@@ -33,7 +33,7 @@ export default class QuestionList extends Component
                         }}
                         keyExtractor={item => item.id}
                         ItemSeparatorComponent={() => null}
-                        ListHeaderComponent={() => null}
+                        ListHeaderComponent={() => this.props.header}
                         ListFooterComponent={() => null}
                         refreshing={this.props.refreshing}
                         onRefresh={this.props.onRefresh}

@@ -1,5 +1,6 @@
 import React, {Component , PureComponent} from 'react';
 import {View , StyleSheet , Image , Dimensions} from 'react-native';
+import {Toast} from 'native-base';
 import QuestionStatus from "../../../enum/QuestionStatus";
 import String from '../../../res/string/String';
 import QuestionHeader from "./QuestionHeader";
@@ -9,6 +10,9 @@ import Divider from './../general/Divider';
 import ViewShot from 'react-native-view-shot';
 import RNFS from 'react-native-fs';
 import Link from './../../../constant/Link';
+import Share from 'react-native-share';
+import QuestionStorage from "../../../utils/storage/QuestionStorage";
+
 
 
 export default class Question extends PureComponent
@@ -34,6 +38,31 @@ export default class Question extends PureComponent
         });
     };
 
+    onSharePressed = () =>
+    {
+        let shareOptions = {
+            title: String.app_name,
+            message: this.props.question.content + "\n" + "____________________" + "\n" + this.props.question.answer,
+            url: "",
+            subject: String.app_name
+        };
+
+        Share.open(shareOptions);
+    };
+
+    onBookmarkPressed = () =>
+    {
+        QuestionStorage.saveQuestion(this.props.question).catch(() =>
+        {
+            Toast.show({
+                text: String.you_cannot_save_more_than_500_questions,
+                position: 'bottom',
+                type: 'danger' ,
+                duration : 3000
+            })
+        });
+    };
+
     render()
     {
         const {question} = this.props;
@@ -46,7 +75,13 @@ export default class Question extends PureComponent
                     {
                         question.status === QuestionStatus.APPROVED ? this.renderAnswer() : null
                     }
-                    <QuestionActions onCapturePressed={this.onCapturePressed} videoLink={question.videoLink} externalLink={question.externalLink}/>
+
+                    <QuestionActions
+                        onBookmarkPressed={this.onBookmarkPressed}
+                        onCapturePressed={this.onCapturePressed}
+                        onSharePressed={this.onSharePressed}
+                        videoLink={question.videoLink} externalLink={question.externalLink}/>
+
                 </View>
 
             </ViewShot>
