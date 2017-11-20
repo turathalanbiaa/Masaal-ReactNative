@@ -27,7 +27,6 @@ export function fetchRecentQuestionsWithAnnouncements(offset = 0 , requestId)
 
 export function sendQuestion(text , type , uuid)
 {
-    console.log(uuid);
     return function(dispatch)
     {
         dispatch({type : 'SENDING_QUESTION_START'});
@@ -42,7 +41,6 @@ export function sendQuestion(text , type , uuid)
         Http.post(Link.question.send , params)
             .then(response =>
             {
-                console.log(response);
                 if (response.success)
                     dispatch({type : 'SENDING_QUESTION_DONE'});
                 else
@@ -53,12 +51,5 @@ export function sendQuestion(text , type , uuid)
                 console.log(e);
                 dispatch({type : 'SENDING_QUESTION_FAIL'});
             })
-    }
-}
-
-export function startNewQuestion()
-{
-    return {
-        type : 'SENDING_QUESTION_NEW'
     }
 }

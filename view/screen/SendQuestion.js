@@ -5,7 +5,7 @@ import String from './../../res/string/String';
 import {Content , Item , Input , Text , Button , Form , Spinner , Toast} from 'native-base';
 import RadioForm from 'react-native-simple-radio-button';
 import {connect} from 'react-redux';
-import {sendQuestion , startNewQuestion} from "../../redux/actions/questionActions";
+import {sendQuestion} from "../../redux/actions/questionActions";
 import DeviceInfo from 'react-native-device-info';
 
 const type_radio_props = [
