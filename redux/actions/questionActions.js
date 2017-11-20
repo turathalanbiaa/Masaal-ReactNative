@@ -23,3 +23,42 @@ export function fetchRecentQuestionsWithAnnouncements(offset = 0 , requestId)
             })
     }
 }
+
+
+export function sendQuestion(text , type , uuid)
+{
+    console.log(uuid);
+    return function(dispatch)
+    {
+        dispatch({type : 'SENDING_QUESTION_START'});
+
+        let params = {
+            content : text,
+            type : type ,
+            lang : 'en' ,
+            deviceUUID : uuid
+        };
+
+        Http.post(Link.question.send , params)
+            .then(response =>
+            {
+                console.log(response);
+                if (response.success)
+                    dispatch({type : 'SENDING_QUESTION_DONE'});
+                else
+                    dispatch({type : 'SENDING_QUESTION_FAIL'});
+            })
+            .catch((e) =>
+            {
+                console.log(e);
+                dispatch({type : 'SENDING_QUESTION_FAIL'});
+            })
+    }
+}
+
+export function startNewQuestion()
+{
+    return {
+        type : 'SENDING_QUESTION_NEW'
+    }
+}

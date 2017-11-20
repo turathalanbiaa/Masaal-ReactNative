@@ -31,6 +31,18 @@ let String = new LocalizedStrings({
         tags : "الاستفتائات",
         settings : "الاعدادات",
 
+        write_your_question : 'اكتب سؤالك',
+        what_is_your_question : 'ما هو سؤالك ؟',
+        send : "ارسال",
+        feqhi : 'فقهي',
+        aqaedi : 'عقائدي',
+        i_dont_know : 'لا اعرف',
+        public : 'عام',
+        private : 'خاص',
+
+        question_sent : 'تم ارسال السؤال',
+        question_didnot_sent : 'لم يتم ارسال السؤال , حاول مرة اخرى',
+        question_length_must_be_more_than_10_letters: 'طول السوال يجب ان يكون اكثر من ١٠ حروف',
     },
     en: {
         the_question: 'Question : ',
@@ -63,6 +75,19 @@ let String = new LocalizedStrings({
         tags : "Tags",
         settings : "Settings",
 
+
+        write_your_question : 'Write your question',
+        what_is_your_question : 'What is your question ?',
+        send : 'Send',
+        feqhi : 'Feqhi',
+        aqaedi : 'Aqaedi',
+        i_dont_know : "I don't Know",
+        public : 'Public',
+        private : 'Private',
+
+        question_sent : 'Question has been sent.',
+        question_didnot_sent : "question didn't sent , please try again.",
+        question_length_must_be_more_than_10_letters: 'Question length must be more than 10 letters',
     },
     fr : {
 

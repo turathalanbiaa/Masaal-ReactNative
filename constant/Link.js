@@ -7,6 +7,7 @@ export default class Link
     static IMAGES = Link.MAIN_LINK + "storage/images/";
 
     static question = {
-        recent : Link.MAIN_API + "question/recent"
+        recent : Link.MAIN_API + "question/recent",
+        send : Link.MAIN_API + "question/new"
     }
 }

@@ -8,6 +8,7 @@ import MyQuestionsScreen from './view/screen/MyQuestions';
 import SettingsScreen from './view/screen/Settings';
 
 const AppNavigation = StackNavigator({
+
     FeqhQuestions : {screen : HomeScreen},
     AqaedQuestions : {screen : HomeScreen},
     FeqhPosts : {screen : PostsScreen} ,

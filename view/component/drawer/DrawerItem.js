@@ -12,18 +12,9 @@ export default class DrawerItem extends Component
         const {navigate} = this.props.navigation;
 
         const resetAction = NavigationActions.reset({
-            index: this.props.screenIndex,
+            index: 0,
             actions: [
-                NavigationActions.navigate({ routeName: 'FeqhQuestions'}),
-                NavigationActions.navigate({ routeName: 'AqaedQuestions'}),
-                NavigationActions.navigate({ routeName: 'SendQuestion'}),
-                NavigationActions.navigate({ routeName: 'FeqhPosts'}),
-                NavigationActions.navigate({ routeName: 'AqaedPosts'}),
-                NavigationActions.navigate({ routeName: 'MyQuestions'}),
-                NavigationActions.navigate({ routeName: 'Search'}),
-                NavigationActions.navigate({ routeName: 'Bookmark'}),
-                NavigationActions.navigate({ routeName: 'Tags'}),
-                NavigationActions.navigate({ routeName: 'Settings'})
+                NavigationActions.navigate({ routeName: this.props.screen}),
             ]
         });
 

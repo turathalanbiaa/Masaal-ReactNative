@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {View, I18nManager} from 'react-native';
 import {connect} from 'react-redux';
 import String from './../../res/string/String';
