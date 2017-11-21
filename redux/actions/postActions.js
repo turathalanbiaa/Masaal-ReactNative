@@ -1,5 +1,6 @@
 import Http from './../../utils/networking/Http';
 import Link from './../../constant/Link';
+import PostStorage from "../../utils/storage/PostStorage";
 
 export function fetchRecentPosts(offset = 0 , requestId)
 {
@@ -11,11 +12,22 @@ export function fetchRecentPosts(offset = 0 , requestId)
             dispatch({type : 'POST_FETCH_MORE'});
 
         Http.fetch(Link.post.recent , {offset : offset , lang : 'en'})
-            .then((result) =>
+            .then(async (result) =>
             {
-                dispatch({type : 'POST_FETCH_COMPLETE' , payload : {
-                    result : result , requestId : requestId
-                }});
+                let savedPostsKeys = await PostStorage.getKeys();
+
+                const STORE = "@POST:";
+                for (let i = 0; i < result.length; i++)
+                {
+                    let key = STORE + result[i].id;
+                    result[i].bookmark = savedPostsKeys.indexOf(key) !== -1;
+                }
+
+                dispatch({
+                    type: 'POST_FETCH_COMPLETE', payload: {
+                        result: result, requestId: requestId
+                    }
+                });
             })
             .catch(() =>
             {

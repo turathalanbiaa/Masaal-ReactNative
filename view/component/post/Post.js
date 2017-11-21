@@ -15,7 +15,7 @@ export default class Post extends PureComponent
     constructor(props)
     {
         super(props);
-        this.state = {};
+        this.state = {bookmark : this.props.post.bookmark};
     }
 
     onCapturePressed = () =>
@@ -47,15 +47,24 @@ export default class Post extends PureComponent
 
     onBookmarkPressed = () =>
     {
-        PostStorage.savePost(this.props.post).catch(() =>
+        if(!this.state.bookmark)
         {
-            Toast.show({
-                text: String.you_cannot_save_more_than_500_posts,
-                position: 'bottom',
-                type: 'danger' ,
-                duration : 3000
-            })
-        });
+            PostStorage.savePost(this.props.post).catch(() =>
+            {
+                Toast.show({
+                    text: String.you_cannot_save_more_than_500_posts,
+                    position: 'bottom',
+                    type: 'danger' ,
+                    duration : 3000
+                })
+            });
+            this.setState({bookmark : true});
+        }
+        else
+        {
+            PostStorage.remove(this.props.post.id);
+            this.setState({bookmark : false});
+        }
     };
 
     render()
@@ -79,6 +88,7 @@ export default class Post extends PureComponent
                     }
 
                     <PostsActions
+                        bookmark={this.state.bookmark}
                         onBookmarkPressed={this.onBookmarkPressed}
                         onCapturePressed={this.onCapturePressed}
                         onSharePressed={this.onSharePressed}
