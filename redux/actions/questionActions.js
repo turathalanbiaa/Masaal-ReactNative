@@ -1,5 +1,6 @@
 import Http from './../../utils/networking/Http';
 import Link from './../../constant/Link';
+import QuestionStorage from "../../utils/storage/QuestionStorage";
 
 export function fetchRecentQuestionsWithAnnouncements(offset = 0 , requestId)
 {
@@ -11,11 +12,21 @@ export function fetchRecentQuestionsWithAnnouncements(offset = 0 , requestId)
             dispatch({type : 'QUESTION_FETCH_MORE'});
 
         Http.fetch(Link.question.recent , {offset : offset , lang : 'en'})
-            .then((result) =>
+            .then(async (result) =>
             {
-                dispatch({type : 'QUESTION_FETCH_COMPLETE' , payload : {
-                    result : result , requestId : requestId
-                }});
+                let savedQuestionsKeys = await QuestionStorage.getKeys();
+                const STORE = "@QUESTION:";
+                for (let i = 0; i < result.questions.length; i++)
+                {
+                    let key = STORE + result.questions[i].id;
+                    result.questions[i].bookmark = savedQuestionsKeys.indexOf(key) !== -1;
+                }
+
+                dispatch({
+                    type: 'QUESTION_FETCH_COMPLETE', payload: {
+                        result: result, requestId: requestId
+                    }
+                });
             })
             .catch(() =>
             {

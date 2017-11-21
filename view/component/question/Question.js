@@ -18,7 +18,7 @@ export default class Question extends PureComponent
     constructor(props)
     {
         super(props);
-        this.state = {};
+        this.state = {bookmark : this.props.question.bookmark};
     }
 
     onCapturePressed = () =>
@@ -50,15 +50,25 @@ export default class Question extends PureComponent
 
     onBookmarkPressed = () =>
     {
-        QuestionStorage.saveQuestion(this.props.question).catch(() =>
+        if(!this.state.bookmark)
         {
-            Toast.show({
-                text: String.you_cannot_save_more_than_500_questions,
-                position: 'bottom',
-                type: 'danger' ,
-                duration : 3000
-            })
-        });
+            QuestionStorage.saveQuestion(this.props.question).catch(() =>
+            {
+                Toast.show({
+                    text: String.you_cannot_save_more_than_500_questions,
+                    position: 'bottom',
+                    type: 'danger' ,
+                    duration : 3000
+                })
+            });
+
+            this.setState({bookmark : true});
+        }
+        else
+        {
+            QuestionStorage.remove(this.props.question.id);
+            this.setState({bookmark : false});
+        }
     };
 
     render()
@@ -78,6 +88,7 @@ export default class Question extends PureComponent
                         onBookmarkPressed={this.onBookmarkPressed}
                         onCapturePressed={this.onCapturePressed}
                         onSharePressed={this.onSharePressed}
+                        bookmark={this.state.bookmark}
                         videoLink={question.videoLink} externalLink={question.externalLink}/>
 
                 </View>

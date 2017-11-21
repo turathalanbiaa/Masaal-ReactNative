@@ -22,7 +22,7 @@ export default class QuestionActions extends Component
             <View style={styles.container}>
 
                 <Button onPress={this.props.onBookmarkPressed} style={styles.button} transparent small>
-                    <Icon name='md-bookmark' />
+                    <Icon style={{color : this.props.bookmark ? 'red' : 'blue'}} name='md-bookmark' />
                 </Button>
 
                 <Button onPress={this.props.onSharePressed} style={styles.button} transparent small>

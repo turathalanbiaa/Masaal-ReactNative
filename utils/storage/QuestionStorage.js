@@ -53,13 +53,29 @@ export default class QuestionStorage
     {
         let key = STORE + ":" + id;
         let question = await AsyncStorage.getItem(key);
-        return JSON.parse(question);
+        if (question !== null)
+        {
+            return JSON.parse(question);
+        }
+        return null;
+    }
+
+    static async getKeys()
+    {
+        let allKeys = await AsyncStorage.getAllKeys();
+        let keys = [];
+
+        for(let i=0;i<allKeys.length;i++)
+            if(allKeys[i].includes(STORE))
+                keys.push(allKeys[i]);
+
+        return keys;
     }
 
     static remove(id)
     {
         let key = STORE + ":" + id;
-        AsyncStorage.getItem(key);
+        AsyncStorage.removeItem(key);
     }
 
 }
