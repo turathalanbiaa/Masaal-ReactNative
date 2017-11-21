@@ -1,19 +1,16 @@
 import React, {Component , PureComponent} from 'react';
-import {View , StyleSheet , Image , Dimensions} from 'react-native';
+import {View , StyleSheet , Image , Dimensions , Text} from 'react-native';
 import {Toast} from 'native-base';
-import QuestionStatus from "../../../enum/QuestionStatus";
 import String from '../../../res/string/String';
-import QuestionHeader from "./QuestionHeader";
-import QuestionText from "./QuestionText";
-import QuestionActions from "./QuestionActions";
-import Divider from './../general/Divider';
+import PostHeader from "./PostHeader";
+import PostsActions from "./PostActions";
 import ViewShot from 'react-native-view-shot';
 import RNFS from 'react-native-fs';
 import Link from './../../../constant/Link';
 import Share from 'react-native-share';
-import QuestionStorage from "../../../utils/storage/QuestionStorage";
+import PostStorage from "../../../utils/storage/PostStorage";
 
-export default class Question extends PureComponent
+export default class Post extends PureComponent
 {
     constructor(props)
     {
@@ -27,7 +24,7 @@ export default class Question extends PureComponent
         {
             console.log("image saved ", uri);
 
-            let destination = RNFS.DocumentDirectoryPath + "/" + this.props.question.id + ".jpg";
+            let destination = RNFS.DocumentDirectoryPath + "/" + "p_" + this.props.post.id + ".jpg";
             RNFS.moveFile(uri , destination).then(() =>
             {
                 console.log('moved to : ' + destination);
@@ -40,7 +37,7 @@ export default class Question extends PureComponent
     {
         let shareOptions = {
             title: String.app_name,
-            message: this.props.question.content + "\n" + "____________________" + "\n" + this.props.question.answer,
+            message: this.props.post.content,
             url: "",
             subject: String.app_name
         };
@@ -50,10 +47,10 @@ export default class Question extends PureComponent
 
     onBookmarkPressed = () =>
     {
-        QuestionStorage.saveQuestion(this.props.question).catch(() =>
+        PostStorage.savePost(this.props.post).catch(() =>
         {
             Toast.show({
-                text: String.you_cannot_save_more_than_500_questions,
+                text: String.you_cannot_save_more_than_500_posts,
                 position: 'bottom',
                 type: 'danger' ,
                 duration : 3000
@@ -63,22 +60,29 @@ export default class Question extends PureComponent
 
     render()
     {
-        const {question} = this.props;
+
+        const {width} = Dimensions.get('window');
+        const {post} = this.props;
+
         return (
             <ViewShot ref={ref => this.viewShot = ref} options={{ format: "jpg", quality: 0.9 }}>
 
                 <View style={styles.container}>
-                    <QuestionHeader name={question.userDisplayName} category={question.category} time={question.time}/>
-                    <QuestionText style={styles.topDownSpace} content={question.content} title={String.the_question}/>
+
+                    <PostHeader time={post.time}/>
+
+                    <Text style={[styles.topDownSpace , styles.paragraph]}>{post.content.trim()}</Text>
+
                     {
-                        question.status === QuestionStatus.APPROVED ? this.renderAnswer() : null
+                        (post.image !== null && post.image.trim() !== "")
+                        && <Image source={{uri : Link.IMAGES + post.image}} style={{width : '100%' , height : width*0.7 , marginBottom : 8}}/>
                     }
 
-                    <QuestionActions
+                    <PostsActions
                         onBookmarkPressed={this.onBookmarkPressed}
                         onCapturePressed={this.onCapturePressed}
                         onSharePressed={this.onSharePressed}
-                        videoLink={question.videoLink} externalLink={question.externalLink}/>
+                    />
 
                 </View>
 
@@ -87,20 +91,6 @@ export default class Question extends PureComponent
         );
     }
 
-    renderAnswer = () =>
-    {
-        const {question} = this.props;
-        const {width} = Dimensions.get('window');
-        return (
-            <View>
-                <Divider/>
-                <QuestionText style={styles.topDownSpace} content={question.answer}  title={String.the_answer}/>
-                {
-                    (question.image !== null && question.image.trim() !== "") && <Image source={{uri : Link.IMAGES + question.image}} style={{width : '100%' , height : width*0.7 , marginBottom : 8}}/>
-                }
-            </View>
-        )
-    }
 }
 
 const styles = StyleSheet.create({
@@ -113,5 +103,10 @@ const styles = StyleSheet.create({
     },
     topDownSpace : {
         marginTop : 8 , marginBottom : 8
+    },
+    paragraph : {
+        fontSize: 14 ,
+        color : '#777777' ,
+        fontFamily : 'JF Flat',
     }
 });

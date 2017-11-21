@@ -9,5 +9,9 @@ export default class Link
     static question = {
         recent : Link.MAIN_API + "question/recent",
         send : Link.MAIN_API + "question/new"
+    };
+
+    static post = {
+        recent : Link.MAIN_API + "post/recent"
     }
 }

@@ -19,6 +19,7 @@ let String = new LocalizedStrings({
         app_name : "الاجوبة المسيرة" ,
         announcement : 'اعلان مثبت' ,
         you_cannot_save_more_than_500_questions : 'لا يمكنك حفظ اكثر من ٥٠٠ سؤال',
+        you_cannot_save_more_than_500_posts : 'لا يمكنك حفظ اكثر من ٥٠٠ منشور',
 
         feqh_questions : "الاسئلة الافقهية",
         aqaed_questions : "الاسئلة العقائدية",
@@ -43,6 +44,12 @@ let String = new LocalizedStrings({
         question_sent : 'تم ارسال السؤال',
         question_didnot_sent : 'لم يتم ارسال السؤال , حاول مرة اخرى',
         question_length_must_be_more_than_10_letters: 'طول السوال يجب ان يكون اكثر من ١٠ حروف',
+
+
+        general_posts : 'منشورات عامة',
+        loading_posts : 'جاري تحميل المنشورات...',
+
+
     },
     en: {
         the_question: 'Question : ',
@@ -62,6 +69,7 @@ let String = new LocalizedStrings({
         app_name:"Simple Answers" ,
         announcement : 'Fixed Announcement',
         you_cannot_save_more_than_500_questions : 'You cannot save more than 500 questions',
+        you_cannot_save_more_than_500_posts : 'You cannot save more than 500 posts',
 
 
         feqh_questions : "Feqh Questions",
@@ -88,11 +96,14 @@ let String = new LocalizedStrings({
         question_sent : 'Question has been sent.',
         question_didnot_sent : "question didn't sent , please try again.",
         question_length_must_be_more_than_10_letters: 'Question length must be more than 10 letters',
+
+        general_posts : 'General Posts',
+        loading_posts : 'Loading Posts...',
+
     },
     fr : {
 
     }
-
 });
 
 export default String;
