@@ -37,13 +37,13 @@ export default class QuestionStorage
 
     static async getQuestions()
     {
-        let keys = await AsyncStorage.getAllKeys();
+        let keys = await QuestionStorage.getKeys();
         let questionsAsString = await AsyncStorage.multiGet(keys);
         let questions = [];
 
-        for(let i=0;i<questions.length;i++)
+        for(let i=0;i<questionsAsString.length;i++)
         {
-            questions.push(JSON.parse(questionsAsString[i]));
+            questions.push(JSON.parse(questionsAsString[i][1]));
         }
 
         return questions;

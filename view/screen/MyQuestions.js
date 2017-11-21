@@ -1,22 +1,64 @@
-import React , {Component} from 'react';
-import {Button , Text} from 'native-base';
-import {NavigationActions} from 'react-navigation';
+import React from 'react';
+import {View, I18nManager} from 'react-native';
+import {connect} from 'react-redux';
+import String from './../../res/string/String';
+import QuestionList from "../component/question/QuestionList";
+import Screen from './Screen';
+import {fetchMyQuestions} from "../../redux/actions/questionActions";
 
-export default class MyQuestions extends Component
+
+class MyQuestions extends Screen
 {
+
     constructor(props)
     {
         super(props);
-        this.state = {};
     }
 
-    render()
+    componentDidMount()
+    {
+        I18nManager.forceRTL(false);
+        this.props.dispatch(fetchMyQuestions(this.props.requestId));
+    }
+
+    _onRefresh = () =>
+    {
+        this.props.dispatch(fetchMyQuestions(this.props.requestId));
+    };
+
+
+    renderContent()
     {
         return (
-            <Button onPress={() => {
-                const backAction = NavigationActions.back();
-                this.props.navigation.dispatch(backAction);
-            }} style={{marginTop : 50}}><Text>MyQuestions</Text></Button>
-        );
+            <View style={{flex: 1}}>
+
+                <QuestionList
+                    questions={this.props.questions}
+                    refreshing={this.props.fetching}
+                    header={null}
+                    onRefresh={this._onRefresh}
+                    firstError={this.props.fetchingError && this.props.questions.length === 0}
+                    moreError={this.props.fetchingError && this.props.questions.length > 0}
+                />
+
+            </View>
+        )
     }
+
+    title = () =>
+    {
+        return String.my_questions;
+    }
+
 }
+
+export default connect((state) =>
+{
+    return {
+        fetching: state.question.fetching,
+        fetchingError: state.question.fetchingError,
+        fetchingMore: state.question.fetchingMore,
+        questions: state.question.questions,
+        requestId: state.question.requestId
+    }
+})(MyQuestions);

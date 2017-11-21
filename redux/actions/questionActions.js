@@ -35,6 +35,28 @@ export function fetchRecentQuestionsWithAnnouncements(offset = 0 , requestId)
     }
 }
 
+export function fetchMyQuestions(requestId)
+{
+    return function (dispatch)
+    {
+        dispatch({type: 'QUESTION_FETCH_START'});
+
+        QuestionStorage.getQuestions().then((questions) =>
+        {
+            for(let i=0;i<questions.length;i++)
+                questions[i].bookmark = true;
+
+            console.log(questions);
+
+            dispatch({
+                type: 'QUESTION_FETCH_COMPLETE', payload: {result : {questions : questions , announcements : []} , requestId : requestId}
+            });
+        }).catch(() =>
+        {
+            dispatch({type : 'QUESTION_FETCH_FAIL'});
+        });
+    }
+}
 
 export function sendQuestion(text , type , uuid)
 {
