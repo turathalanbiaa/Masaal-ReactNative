@@ -3,7 +3,7 @@ import {View , I18nManager} from 'react-native';
 import Screen from './Screen';
 import {connect} from 'react-redux';
 import String from './../../res/string/String';
-import {search} from "../../redux/actions/questionActions";
+import {search, searchByTag} from "../../redux/actions/questionActions";
 import QuestionList from "../component/question/QuestionList";
 
 
@@ -17,15 +17,33 @@ class SearchResult extends Screen
     componentDidMount()
     {
         I18nManager.forceRTL(false);
-        let {category , text} = this.props.navigation.state.params;
-        this.props.dispatch(search(text, category , this.props.requestId));
+        let {params} = this.props.navigation.state;
+
+        if (params.tagId !== undefined)
+        {
+            console.log(params);
+            this.props.dispatch(searchByTag(params.tagId , this.props.requestId));
+        }
+        else
+        {
+            this.props.dispatch(search(params.text, params.category , this.props.requestId));
+        }
     }
 
 
     _onRefresh = () =>
     {
-        let {category , text} = this.props.navigation.state.params;
-        this.props.dispatch(search(text , category , this.props.requestId));
+        let {params} = this.props.navigation.state;
+
+        if (params.tagId !== undefined)
+        {
+            console.log(params);
+            this.props.dispatch(searchByTag(params.tagId , this.props.requestId));
+        }
+        else
+        {
+            this.props.dispatch(search(params.text, params.category , this.props.requestId));
+        }
     };
 
 
