@@ -49,7 +49,32 @@ let String = new LocalizedStrings({
         general_posts : 'منشورات عامة',
         loading_posts : 'جاري تحميل المنشورات...',
 
+        salah : 'الصلاة',
+        soum : 'الصوم',
+        zakah : 'الزكاة',
+        hij : 'الحج',
+        kumos : 'الخمس',
+        amor : 'الامر بالمعروف',
+        nahi : 'النهي عن المنكر',
+        tawlly : 'التولي لأولياء الله',
+        tabry : 'التبري من اعداء الله',
 
+        twheed : 'التوحيد',
+        adel : 'العدل',
+        nibwa : 'النبوة',
+        imama : 'امامة' ,
+        maad : 'المعاد' ,
+
+        select_category : 'اختر تصنيف',
+        no_category : 'بدون تصنيف',
+        none : 'بدون',
+
+
+        feqh : 'فقه',
+        aqaed : 'عقائد' ,
+
+        search_result : 'نتائج البحث',
+        loading : 'جاري التحميل...'
     },
     en: {
         the_question: 'Question : ',
@@ -100,6 +125,33 @@ let String = new LocalizedStrings({
         general_posts : 'General Posts',
         loading_posts : 'Loading Posts...',
 
+
+        salah : 'Prayers',
+        soum : 'Fasting',
+        zakah : 'Zakat',
+        hij : 'Pilgrimage',
+        kumos : 'Koums',
+        amor : 'Amor Bel Maroof',
+        nahi : 'Nahi An Almonker',
+        tawlly : 'Altawlly Li Awlaa Allah',
+        tabry : 'Altabry Men Adaa Allah',
+
+        twheed : 'Altwheed',
+        adel : 'Aladel',
+        nibwa : 'Alnibwa',
+        imama : 'Alimama' ,
+        maad : 'Almaad' ,
+
+        select_category : 'Select Category',
+        no_category : 'None',
+        none : 'None',
+
+
+        feqh : 'Feqh',
+        aqaed : 'Aqaed',
+
+        search_result : 'Search Result',
+        loading : 'Loading...'
     },
     fr : {
 

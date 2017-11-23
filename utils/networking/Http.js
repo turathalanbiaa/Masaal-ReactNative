@@ -8,6 +8,8 @@ export default class Http
             headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
         };
 
+        console.log(params);
+
         return new Promise(function (resolve, reject)
         {
 
@@ -34,6 +36,7 @@ export default class Http
                 })
                 .catch((e) =>
                 {
+                    console.log(e);
                     clearTimeout(timeoutId);
                     reject(e);
                 });

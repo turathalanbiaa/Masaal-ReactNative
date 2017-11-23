@@ -6,6 +6,8 @@ import SendQuestionScreen from './view/screen/SendQuestion';
 import PostsScreen from './view/screen/Posts';
 import MyQuestionsScreen from './view/screen/MyQuestions';
 import SettingsScreen from './view/screen/Settings';
+import Search from "./view/screen/Search";
+import SearchResult from './view/screen/SearchResult';
 
 const AppNavigation = StackNavigator({
 
@@ -15,7 +17,8 @@ const AppNavigation = StackNavigator({
     AqaedPosts : {screen : PostsScreen} ,
     MyQuestions : {screen : MyQuestionsScreen} ,
     SendQuestion : {screen : SendQuestionScreen} ,
-    Search : {screen : SendQuestionScreen} ,
+    Search : {screen : Search} ,
+    SearchResult : {screen : SearchResult} ,
     Bookmark : {screen : SendQuestionScreen} ,
     Tags : {screen : SendQuestionScreen} ,
     Settings : {screen : SettingsScreen}
