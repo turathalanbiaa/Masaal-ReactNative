@@ -8,8 +8,6 @@ export default class Http
             headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
         };
 
-        console.log(params);
-
         return new Promise(function (resolve, reject)
         {
 

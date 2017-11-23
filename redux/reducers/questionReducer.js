@@ -4,11 +4,11 @@ let initialState = {
     questions: [],
     fetchingError: false,
     announcements: [],
+    newCount : 0,
     requestId: 0
 };
 export default (state = initialState, action) =>
 {
-
     switch (action.type)
     {
         case 'QUESTION_FETCH_START'     :
@@ -19,7 +19,7 @@ export default (state = initialState, action) =>
                 fetchingError: false,
                 questions: [],
                 announcements: [],
-                requestId: state.requestId +1 ,
+                requestId: state.requestId + 1 ,
             };
 
         case 'QUESTION_FETCH_MORE'      :
@@ -38,7 +38,8 @@ export default (state = initialState, action) =>
                     ...state,
                     fetching: false,
                     fetchingMore: false,
-                    fetchingError: false
+                    fetchingError: false ,
+                    newCount : 0 ,
                 };
             }
             return {
@@ -46,6 +47,7 @@ export default (state = initialState, action) =>
                 fetching: false,
                 fetchingMore: false,
                 fetchingError: false,
+                newCount : action.payload.result.questions.length,
                 questions: state.questions.concat(action.payload.result.questions),
                 announcements: action.payload.result.announcements ,
                 requestId : state.requestId + 1

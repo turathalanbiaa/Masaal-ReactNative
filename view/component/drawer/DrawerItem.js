@@ -14,7 +14,7 @@ export default class DrawerItem extends Component
         const resetAction = NavigationActions.reset({
             index: 0,
             actions: [
-                NavigationActions.navigate({ routeName: this.props.screen}),
+                NavigationActions.navigate({ routeName: this.props.screen , params : this.props.params}),
             ]
         });
 

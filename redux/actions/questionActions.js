@@ -1,38 +1,11 @@
 import Http from './../../utils/networking/Http';
 import Link from './../../constant/Link';
 import QuestionStorage from "../../utils/storage/QuestionStorage";
+import fetchQuestions from "./question/fetchQuestions";
 
-export function fetchRecentQuestionsWithAnnouncements(offset = 0 , requestId)
+export function fetchRecentQuestionsWithAnnouncements(type , lang , offset = 0 , requestId)
 {
-    return function(dispatch)
-    {
-        if (offset === 0)
-            dispatch({type : 'QUESTION_FETCH_START'});
-        else
-            dispatch({type : 'QUESTION_FETCH_MORE'});
-
-        Http.fetch(Link.question.recent , {offset : offset , lang : 'en'})
-            .then(async (result) =>
-            {
-                let savedQuestionsKeys = await QuestionStorage.getKeys();
-                const STORE = "@QUESTION:";
-                for (let i = 0; i < result.questions.length; i++)
-                {
-                    let key = STORE + result.questions[i].id;
-                    result.questions[i].bookmark = savedQuestionsKeys.indexOf(key) !== -1;
-                }
-
-                dispatch({
-                    type: 'QUESTION_FETCH_COMPLETE', payload: {
-                        result: result, requestId: requestId
-                    }
-                });
-            })
-            .catch(() =>
-            {
-                dispatch({type : 'QUESTION_FETCH_FAIL'});
-            })
-    }
+    return fetchQuestions(Link.question.recent , {type : type , lang : lang , offset : offset} , requestId);
 }
 
 export function fetchMyQuestions(requestId)
