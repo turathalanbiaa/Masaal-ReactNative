@@ -40,6 +40,7 @@ let String = new LocalizedStrings({
         i_dont_know : 'لا اعرف',
         public : 'عام',
         private : 'خاص',
+        privacy : 'الخصوصية',
 
         question_sent : 'تم ارسال السؤال',
         question_didnot_sent : 'لم يتم ارسال السؤال , حاول مرة اخرى',
@@ -74,7 +75,8 @@ let String = new LocalizedStrings({
         aqaed : 'عقائد' ,
 
         search_result : 'نتائج البحث',
-        loading : 'جاري التحميل...'
+        loading : 'جاري التحميل...',
+        type_of_question : 'نوع السؤال'
     },
     en: {
         the_question: 'Question : ',
@@ -114,7 +116,7 @@ let String = new LocalizedStrings({
         send : 'Send',
         feqhi : 'Feqhi',
         aqaedi : 'Aqaedi',
-        i_dont_know : "I don't Know",
+        i_dont_know : "I Don't Know",
         public : 'Public',
         private : 'Private',
 
@@ -145,13 +147,15 @@ let String = new LocalizedStrings({
         select_category : 'Select Category',
         no_category : 'None',
         none : 'None',
+        privacy : 'Privacy',
 
 
         feqh : 'Feqh',
         aqaed : 'Aqaed',
 
         search_result : 'Search Result',
-        loading : 'Loading...'
+        loading : 'Loading...',
+        type_of_question : 'Type Of Question'
     },
     fr : {
 

@@ -1,18 +1,14 @@
 import React from 'react';
-import { View} from 'native-base';
+import {View} from 'native-base';
 import Screen from './Screen';
 import String from './../../res/string/String';
-import {Content , Item , Input , Text , Button , Form , Spinner , Toast} from 'native-base';
-import RadioForm from 'react-native-simple-radio-button';
+import {Content, Item, Input, Text, Button, Form, Spinner, Toast} from 'native-base';
 import {connect} from 'react-redux';
 import {sendQuestion} from "../../redux/actions/questionActions";
 import DeviceInfo from 'react-native-device-info';
+import QuestionTypeRadio from "../component/question/QuestionTypeRadio";
+import QuestionPrivacyRadio from "../component/question/QuestionPrivacyRadio";
 
-const type_radio_props = [
-    {label: String.feqhi , value: 1 },
-    {label: String.aqaedi , value: 2 },
-    {label: String.i_dont_know , value: 1 }
-];
 
 let input = null;
 
@@ -21,26 +17,33 @@ class SendQuestion extends Screen
     constructor(props)
     {
         super(props);
-        this.state = {text : '' , type : 1};
+        this.state = {type: 1, privacy: 1};
     }
 
     _sendQuestion = () =>
     {
-        if(!this.validate())
+        if (!this.validate())
+        {
             return;
+        }
 
         let uuid = DeviceInfo.getUniqueID();
         let text = input._root._lastNativeText;
-        this.props.dispatch(sendQuestion(text , this.state.type , uuid));
+        this.props.dispatch(sendQuestion(text, this.state.type, this.state.privacy, uuid));
 
     };
 
     validate = () =>
     {
         let text = input._root._lastNativeText;
-        if(text.trim().length <= 10)
+        if (text.trim().length <= 10)
         {
-            Toast.show({   text: String.question_length_must_be_more_than_10_letters , type:'danger' , position: 'bottom', duration : 3000});
+            Toast.show({
+                text: String.question_length_must_be_more_than_10_letters,
+                type: 'danger',
+                position: 'bottom',
+                duration: 3000
+            });
             return false;
         }
 
@@ -51,7 +54,7 @@ class SendQuestion extends Screen
     {
 
         return (
-            <Content style={{padding : 8}}>
+            <Content style={{padding: 8}}>
 
                 <Form>
 
@@ -61,27 +64,28 @@ class SendQuestion extends Screen
                             ref={component => input = component}
                             placeholder={String.what_is_your_question}
                             autoCapitalize="none" editable={!this.props.sending} autoCorrect={false} multiline={true}
-                            style={{height : 250}}/>
+                            style={{height: 150}}/>
 
                     </Item>
 
-                    <View style={{marginTop : 18 , marginLeft: 12 , marginRight : 12 , alignItems : 'flex-start'}}>
-                        <Text>Type Of Question</Text>
-                        <RadioForm
-                            style={{alignItems : 'flex-start' , marginTop : 6}}
-                            radio_props={type_radio_props}
-                            initial={0}
-                            onPress={(value) => {this.setState({type:value})}}
-                        />
-                    </View>
+                    <QuestionTypeRadio onPress={(value) =>
+                    {
+                        this.setState({type: value})
+                    }}/>
+
+                    <QuestionPrivacyRadio onPress={(value) =>
+                    {
+                        this.setState({privacy: value})
+                    }}/>
 
                 </Form>
 
                 {
                     this.props.sending ?
-                        <Spinner color='blue' />
+                        <Spinner color='blue'/>
                         :
-                        <Button full rounded onPress={this._sendQuestion} style={{marginTop : 20}}><Text>{String.send}</Text></Button>
+                        <Button full rounded onPress={this._sendQuestion}
+                                style={{marginTop: 20}}><Text>{String.send}</Text></Button>
                 }
 
             </Content>
@@ -96,27 +100,27 @@ class SendQuestion extends Screen
 
 export default connect((store) =>
 {
-    if(store.sendQuestionReducer.complete)
+    if (store.sendQuestionReducer.complete)
     {
-        if(store.sendQuestionReducer.success)
+        if (store.sendQuestionReducer.success)
         {
-            Toast.show({   text: String.question_sent, type:'success' , position: 'bottom', duration : 3000});
+            Toast.show({text: String.question_sent, type: 'success', position: 'bottom', duration: 3000});
 
-            if(input !== null)
+            if (input !== null)
             {
-                input.setNativeProps({text : ''});
+                input.setNativeProps({text: ''});
                 input._root._lastNativeText = '';
             }
         }
         else
         {
-            Toast.show({   text: String.question_didnot_sent, type:'danger' , position: 'bottom', duration : 3000});
+            Toast.show({text: String.question_didnot_sent, type: 'danger', position: 'bottom', duration: 3000});
         }
     }
 
     return {
-        sending : store.sendQuestionReducer.sending,
-        complete : store.sendQuestionReducer.complete ,
-        success : store.sendQuestionReducer.success
+        sending: store.sendQuestionReducer.sending,
+        complete: store.sendQuestionReducer.complete,
+        success: store.sendQuestionReducer.success
     }
 })(SendQuestion)
