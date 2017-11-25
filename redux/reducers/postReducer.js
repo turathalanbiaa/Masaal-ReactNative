@@ -2,6 +2,7 @@ let initialState = {
     fetching: false,
     fetchingMore: false,
     posts: [],
+    newCount : 0 ,
     fetchingError: false,
     requestId: 0
 };
@@ -36,7 +37,8 @@ export default (state = initialState, action) =>
                     ...state,
                     fetching: false,
                     fetchingMore: false,
-                    fetchingError: false
+                    fetchingError: false,
+                    newCount : 0
                 };
             }
             return {
@@ -44,6 +46,7 @@ export default (state = initialState, action) =>
                 fetching: false,
                 fetchingMore: false,
                 fetchingError: false,
+                newCount : action.payload.result.length ,
                 posts: state.posts.concat(action.payload.result),
                 requestId : state.requestId + 1
             };

@@ -8,6 +8,7 @@ import {sendQuestion} from "../../redux/actions/questionActions";
 import DeviceInfo from 'react-native-device-info';
 import QuestionTypeRadio from "../component/question/QuestionTypeRadio";
 import QuestionPrivacyRadio from "../component/question/QuestionPrivacyRadio";
+import Toaster from "../../utils/ui/Toaster";
 
 
 let input = null;
@@ -38,15 +39,9 @@ class SendQuestion extends Screen
         let text = input._root._lastNativeText;
         if (text.trim().length <= 10)
         {
-            Toast.show({
-                text: String.question_length_must_be_more_than_10_letters,
-                type: 'danger',
-                position: 'bottom',
-                duration: 3000
-            });
+            Toaster.show(String.question_length_must_be_more_than_10_letters , 'danger');
             return false;
         }
-
         return true;
     };
 

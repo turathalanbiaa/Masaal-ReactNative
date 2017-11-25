@@ -5,37 +5,41 @@ import String from './../../res/string/String';
 import Screen from './Screen';
 import {fetchRecentPosts} from "../../redux/actions/postActions";
 import PostList from "../component/post/PostList";
+import Setting from "../../constant/Setting";
+import JSHelper from "../../utils/JSHelper";
 
 
 class Posts extends Screen
 {
 
-    constructor(props)
-    {
-        super(props);
-    }
-
     componentDidMount()
     {
-        I18nManager.forceRTL(false);
-        this.props.dispatch(fetchRecentPosts(0, this.props.requestId));
+        I18nManager.forceRTL(Setting.isRTL());
+        this.loadPosts();
     }
 
     _onRefresh = () =>
     {
-        this.props.dispatch(fetchRecentPosts(0, this.props.requestId));
+        this.loadPosts();
     };
 
     _onEndReached = () =>
     {
-        if (this.props.fetching || this.props.fetchingMore)
+        if (this.props.fetching || this.props.fetchingMore || this.props.newCount === 0)
         {
             return;
         }
 
-        this.props.dispatch(fetchRecentPosts(this.props.posts.length, this.props.requestId))
+        this.loadPosts(this.props.posts.length);
     };
 
+
+    loadPosts = (offset = 0) =>
+    {
+        let type = JSHelper.getScreenParams(this.props.navigation , "type" , 1);
+        let lang = Setting.settings.lang;
+        this.props.dispatch(fetchRecentPosts(lang , type , offset, this.props.requestId));
+    };
 
     renderContent()
     {
@@ -58,7 +62,8 @@ class Posts extends Screen
 
     title = () =>
     {
-        return String.feqh_posts;
+        let type = JSHelper.getScreenParams(this.props.navigation , "type" , 1);
+        return type === 1 ? String.feqh_posts : String.aqaed_posts;
     }
 
 
@@ -71,6 +76,7 @@ export default connect((state) =>
         fetchingError: state.post.fetchingError,
         fetchingMore: state.post.fetchingMore,
         posts: state.post.posts,
+        newCount : state.post.newCount,
         requestId: state.post.requestId
     }
 })(Posts);

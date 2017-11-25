@@ -12,10 +12,8 @@ import Tag from "./view/screen/Tag";
 
 const AppNavigation = StackNavigator({
 
-    FeqhQuestions : {screen : HomeScreen},
-    AqaedQuestions : {screen : HomeScreen},
-    FeqhPosts : {screen : PostsScreen} ,
-    AqaedPosts : {screen : PostsScreen} ,
+    Home : {screen : HomeScreen},
+    Posts : {screen : PostsScreen} ,
     MyQuestions : {screen : MyQuestionsScreen} ,
     SendQuestion : {screen : SendQuestionScreen} ,
     Search : {screen : Search} ,

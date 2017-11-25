@@ -1,5 +1,6 @@
 import React, {Component , PureComponent} from 'react';
 import {View , StyleSheet , Image , Dimensions , Text} from 'react-native';
+import {H3} from 'native-base';
 import {Toast} from 'native-base';
 import String from '../../../res/string/String';
 import PostHeader from "./PostHeader";
@@ -9,6 +10,7 @@ import RNFS from 'react-native-fs';
 import Link from './../../../constant/Link';
 import Share from 'react-native-share';
 import PostStorage from "../../../utils/storage/PostStorage";
+import Divider from "../general/Divider";
 
 export default class Post extends PureComponent
 {
@@ -79,6 +81,9 @@ export default class Post extends PureComponent
                 <View style={styles.container}>
 
                     <PostHeader time={post.time}/>
+
+                    <H3 style={styles.topDownSpace}>{post.title}</H3>
+                    <Divider/>
 
                     <Text style={[styles.topDownSpace , styles.paragraph]}>{post.content.trim()}</Text>
 

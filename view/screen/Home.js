@@ -12,11 +12,6 @@ import Setting from "../../constant/Setting";
 class Home extends Screen
 {
 
-    constructor(props)
-    {
-        super(props);
-    }
-
     componentDidMount()
     {
         I18nManager.forceRTL(Setting.isRTL());

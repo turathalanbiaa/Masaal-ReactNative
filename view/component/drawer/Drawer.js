@@ -15,11 +15,14 @@ export default class Drawer extends Component
 
                 <ScrollView style={{flex : 1 , marginTop : 2}}>
 
-                    <DrawerItem iconName="md-cube" title={String.feqh_questions} screenIndex={0} screen="FeqhQuestions" params={{type : 1}} navigation={this.props.navigation}/>
-                    <DrawerItem iconName="md-cube" title={String.aqaed_questions} screenIndex={1} screen="AqaedQuestions" params={{type : 2}} navigation={this.props.navigation}/>
+                    <DrawerItem iconName="md-cube" title={String.feqh_questions} screenIndex={0} screen="Home" params={{type : 1}} navigation={this.props.navigation}/>
+                    <DrawerItem iconName="md-cube" title={String.aqaed_questions} screenIndex={1} screen="Home" params={{type : 2}} navigation={this.props.navigation}/>
+
                     <DrawerItem iconName="md-send" title={String.send_question} screenIndex={2} screen="SendQuestion" navigation={this.props.navigation}/>
-                    <DrawerItem iconName="md-document" title={String.feqh_posts} screenIndex={3} screen="FeqhPosts" navigation={this.props.navigation}/>
-                    <DrawerItem iconName="md-document" title={String.aqaed_posts} screenIndex={4} navigation={this.props.navigation}/>
+
+                    <DrawerItem iconName="md-document" title={String.feqh_posts} screenIndex={3} screen="Posts" params={{type : 1}} navigation={this.props.navigation}/>
+                    <DrawerItem iconName="md-document" title={String.aqaed_posts} screenIndex={4} screen="Posts" params={{type : 2}} navigation={this.props.navigation}/>
+
                     <DrawerItem iconName="md-archive" title={String.my_questions} screenIndex={5} screen="MyQuestions" navigation={this.props.navigation}/>
                     <DrawerItem iconName="md-search" title={String.search} screenIndex={6} screen="Search" navigation={this.props.navigation}/>
                     <DrawerItem iconName="md-bookmark" title={String.bookmark} screenIndex={7} navigation={this.props.navigation}/>
