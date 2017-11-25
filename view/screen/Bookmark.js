@@ -4,26 +4,22 @@ import {connect} from 'react-redux';
 import String from './../../res/string/String';
 import QuestionList from "../component/question/QuestionList";
 import Screen from './Screen';
-import {fetchMyQuestions} from "../../redux/actions/questionActions";
+import {getBookmark} from "../../redux/actions/questionActions";
+import Setting from "../../constant/Setting";
 
 
 class Bookmark extends Screen
 {
 
-    constructor(props)
-    {
-        super(props);
-    }
-
     componentDidMount()
     {
-        I18nManager.forceRTL(false);
-        this.props.dispatch(fetchMyQuestions(this.props.requestId));
+        I18nManager.forceRTL(Setting.isRTL());
+        this.props.dispatch(getBookmark(this.props.requestId));
     }
 
     _onRefresh = () =>
     {
-        this.props.dispatch(fetchMyQuestions(this.props.requestId));
+        this.props.dispatch(getBookmark(this.props.requestId));
     };
 
 

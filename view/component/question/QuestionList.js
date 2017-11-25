@@ -7,11 +7,6 @@ import String from './../../../res/string/String';
 export default class QuestionList extends Component
 {
 
-    constructor(props)
-    {
-        super(props);
-    }
-
     render()
     {
 
@@ -24,16 +19,16 @@ export default class QuestionList extends Component
                 {this.renderEmptyIfEmpty()}
 
                 {
-                    !this.props.firstError &&
+                    (!this.props.firstError) &&
                     <FlatList
                         data={this.props.questions}
                         renderItem={(item) =>
                         {
-                            return <Question question={item.item}/>;
+                            return <Question question={item.item}/>
                         }}
                         keyExtractor={item => item.id}
                         ItemSeparatorComponent={() => null}
-                        ListHeaderComponent={() => this.props.header}
+                        ListHeaderComponent={() => this.props.questions.length > 0 ? this.props.header : null}
                         ListFooterComponent={() => null}
                         refreshing={this.props.refreshing}
                         onRefresh={this.props.onRefresh}

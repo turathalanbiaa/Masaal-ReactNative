@@ -3,29 +3,21 @@ import { View} from 'native-base';
 import Screen from './Screen';
 import String from './../../res/string/String';
 import {Content , Container , Item , Input , Text , Button , Form , Spinner , Toast} from 'native-base';
-import RadioForm from 'react-native-simple-radio-button';
 import {connect} from 'react-redux';
 import FeqhCategoryPicker from "../component/question/FeqhCategoryPicker";
 import AqeadCategoryPicker from "../component/question/AqeadCategoryPicker";
-
-const type_radio_props = [
-    {label: String.none , value: 0 },
-    {label: String.feqh , value: 1 },
-    {label: String.aqaed , value: 2 }
-];
-
+import QuestionTypeRadio from "../component/question/QuestionTypeRadio";
 
 class Search extends Screen
 {
     constructor(props)
     {
         super(props);
-        this.state = {text : '' , type : 0 , category : null};
+        this.state = {text : '' , type : 1 , category : null};
     }
 
     onCategoryChanged = (value) =>
     {
-        console.log(value);
         this.setState({category : value});
     };
 
@@ -39,7 +31,6 @@ class Search extends Screen
 
         let {navigate} = this.props.navigation;
         navigate('SearchResult' , {text : this.state.text , category : this.state.category});
-
     };
 
 
@@ -60,15 +51,7 @@ class Search extends Screen
                                 autoCapitalize="none" editable={!this.props.sending} autoCorrect={false} multiline={true}/>
                         </Item>
 
-                        <View style={{marginTop : 18 , marginLeft: 12 , marginRight : 12 , alignItems : 'flex-start'}}>
-                            <Text>Type Of Question</Text>
-                            <RadioForm
-                                style={{alignItems : 'flex-start' , marginTop : 6}}
-                                radio_props={type_radio_props}
-                                initial={0}
-                                onPress={(value) => {this.setState({type:value , category : null})}}
-                            />
-                        </View>
+                        <QuestionTypeRadio thirdOption={false} onPress={(value) => {this.setState({type:value , category : null})}}/>
 
                         {
                             this.state.type === 0 ? null : (this.state.type === 1 ?
@@ -79,7 +62,7 @@ class Search extends Screen
 
                     </Form>
 
-                    <Button full rounded onPress={this.search} style={{marginTop : 20}}><Text>{String.send}</Text></Button>
+                    <Button full rounded onPress={this.search} style={{marginTop : 20}}><Text>{String.search}</Text></Button>
 
                 </Content>
             </Container>

@@ -3,8 +3,13 @@ import {View , Text} from 'react-native';
 import String from './../../../res/string/String';
 import RadioForm from 'react-native-simple-radio-button';
 
+const languages = [
+    {label: String.arabic , value: 'ar' },
+    {label: String.english , value: 'en' },
+    {label: String.french , value: 'fr' },
+];
 
-export default class QuestionTypeRadio extends Component
+export default class LanguageRadio extends Component
 {
     constructor(props)
     {
@@ -13,21 +18,12 @@ export default class QuestionTypeRadio extends Component
 
     render()
     {
-
-        const type_radio_props = [
-            {label: String.feqhi , value: 1 },
-            {label: String.aqaedi , value: 2 },
-        ];
-
-        if(this.props.thirdOption)
-            type_radio_props.push({label: String.i_dont_know , value: 1 });
-
         return (
             <View style={{marginTop : 18 , marginLeft: 12 , marginRight : 12 , alignItems : 'flex-start'}}>
                 <Text>{String.type_of_question}</Text>
                 <RadioForm
                     style={{alignItems : 'flex-start' , marginTop : 6}}
-                    radio_props={type_radio_props}
+                    radio_props={languages}
                     initial={0}
                     onPress={(value) => {this.props.onPress(value)}}
                 />
@@ -36,6 +32,6 @@ export default class QuestionTypeRadio extends Component
     }
 }
 
-QuestionTypeRadio.defaultProps = {
+LanguageRadio.defaultProps = {
     thirdOption : true
 };

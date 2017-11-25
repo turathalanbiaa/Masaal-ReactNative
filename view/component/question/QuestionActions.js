@@ -34,7 +34,7 @@ export default class QuestionActions extends Component
                 </Button>
 
                 {
-                    this.props.videoLink &&
+                    (this.props.videoLink !== null && this.props.videoLink !== "")  &&
                     <Button onPress={() => this.openUrl(this.props.videoLink)} style={styles.button} transparent small>
                         <Icon name='logo-youtube' />
                     </Button>
@@ -42,7 +42,7 @@ export default class QuestionActions extends Component
 
 
                 {
-                    this.props.externalLink &&
+                    (this.props.externalLink !== null && this.props.videoLink !== "") &&
                     <Button onPress={() => this.openUrl(this.props.externalLink)} style={styles.button} transparent small>
                         <Icon name='md-link' />
                     </Button>

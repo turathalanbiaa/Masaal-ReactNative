@@ -78,8 +78,10 @@ export default class Question extends PureComponent
             <ViewShot ref={ref => this.viewShot = ref} options={{ format: "jpg", quality: 0.9 }}>
 
                 <View style={styles.container}>
+
                     <QuestionHeader name={question.userDisplayName} category={question.category} time={question.time}/>
                     <QuestionText style={styles.topDownSpace} content={question.content} title={String.the_question}/>
+
                     {
                         question.status === QuestionStatus.APPROVED ? this.renderAnswer() : null
                     }
@@ -89,7 +91,8 @@ export default class Question extends PureComponent
                         onCapturePressed={this.onCapturePressed}
                         onSharePressed={this.onSharePressed}
                         bookmark={this.state.bookmark}
-                        videoLink={question.videoLink} externalLink={question.externalLink}/>
+                        videoLink={question.videoLink}
+                        externalLink={question.externalLink}/>
 
                 </View>
 

@@ -1,8 +1,9 @@
 import React , {Component} from 'react';
-import {Container , Drawer as NSDrawer} from 'native-base';
+import {Container , Drawer as NSDrawer , Button , Icon} from 'native-base';
 import Header from "../component/general/header/Header";
 import Drawer from './../component/drawer/Drawer';
-
+import Setting from "../../constant/Setting";
+import {NavigationActions} from 'react-navigation'
 export default class Screen extends Component
 {
     constructor(props)
@@ -22,6 +23,8 @@ export default class Screen extends Component
 
     render()
     {
+        const right = this.backButton() ? <Button onPress={() => {this.props.navigation.dispatch(NavigationActions.back())}} transparent><Icon name={Setting.isRTL()? 'md-arrow-back' : 'md-arrow-forward'}/></Button>:null;
+
         return (
             <NSDrawer
                 ref={(ref) => { this.drawer = ref; }}
@@ -30,15 +33,17 @@ export default class Screen extends Component
 
                 <Container>
 
-                    <Header title={this.title()} onDrawer={this.openDrawer}/>
-
+                    <Header title={this.title()}
+                            onDrawer={this.openDrawer}
+                            right={right}/>
                     {
                         this.renderContent()
                     }
-
                 </Container>
 
             </NSDrawer>
         )
     }
+
+    backButton = () => false
 }

@@ -9,10 +9,6 @@ import QuestionList from "../component/question/QuestionList";
 
 class SearchResult extends Screen
 {
-    constructor(props)
-    {
-        super(props);
-    }
 
     componentDidMount()
     {
@@ -68,7 +64,9 @@ class SearchResult extends Screen
     title = ()=>
     {
         return String.search_result;
-    }
+    };
+
+    backButton = () => true;
 
 }
 

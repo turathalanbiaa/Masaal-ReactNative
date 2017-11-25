@@ -76,7 +76,13 @@ let String = new LocalizedStrings({
 
         search_result : 'نتائج البحث',
         loading : 'جاري التحميل...',
-        type_of_question : 'نوع السؤال'
+        type_of_question : 'نوع السؤال',
+
+
+        arabic : 'عربي',
+        english : 'English',
+        french : 'French',
+
     },
     en: {
         the_question: 'Question : ',
@@ -155,7 +161,13 @@ let String = new LocalizedStrings({
 
         search_result : 'Search Result',
         loading : 'Loading...',
-        type_of_question : 'Type Of Question'
+        type_of_question : 'Type Of Question' ,
+
+
+        arabic : 'عربي',
+        english : 'English',
+        french : 'French',
+
     },
     fr : {
 
