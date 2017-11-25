@@ -8,7 +8,12 @@ export function fetchRecentQuestionsWithAnnouncements(type, lang, offset = 0, re
     return fetchQuestions(Link.question.recent, {type: type, lang: lang, offset: offset}, requestId);
 }
 
-export function fetchMyQuestions(requestId)
+export function fetchMyQuestions(uuid , requestId)
+{
+    return fetchQuestions(Link.question.my , {deviceUUID : uuid} , requestId);
+}
+
+export function getBookmark(requestId)
 {
     return function (dispatch)
     {

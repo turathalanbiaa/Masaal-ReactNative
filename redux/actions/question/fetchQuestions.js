@@ -17,6 +17,10 @@ export default function fetchQuestions(url, params, requestId)
                 dispatch({type: 'QUESTION_FETCH_MORE'});
             }
         }
+        else
+        {
+            dispatch({type: 'QUESTION_FETCH_START'});
+        }
 
         Http.fetch(url, params)
             .then(async (result) =>

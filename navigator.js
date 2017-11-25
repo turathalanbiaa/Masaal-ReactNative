@@ -9,6 +9,7 @@ import SettingsScreen from './view/screen/Settings';
 import Search from "./view/screen/Search";
 import SearchResult from './view/screen/SearchResult';
 import Tag from "./view/screen/Tag";
+import Bookmark from "./view/screen/Bookmark";
 
 const AppNavigation = StackNavigator({
 
@@ -18,7 +19,7 @@ const AppNavigation = StackNavigator({
     SendQuestion : {screen : SendQuestionScreen} ,
     Search : {screen : Search} ,
     SearchResult : {screen : SearchResult} ,
-    Bookmark : {screen : SendQuestionScreen} ,
+    Bookmark : {screen : Bookmark} ,
     Tags : {screen : Tag} ,
     Settings : {screen : SettingsScreen}
 }, {navigationOptions : { header: null }});

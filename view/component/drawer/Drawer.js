@@ -25,7 +25,7 @@ export default class Drawer extends Component
 
                     <DrawerItem iconName="md-archive" title={String.my_questions} screenIndex={5} screen="MyQuestions" navigation={this.props.navigation}/>
                     <DrawerItem iconName="md-search" title={String.search} screenIndex={6} screen="Search" navigation={this.props.navigation}/>
-                    <DrawerItem iconName="md-bookmark" title={String.bookmark} screenIndex={7} navigation={this.props.navigation}/>
+                    <DrawerItem iconName="md-bookmark" title={String.bookmark} screenIndex={7} screen="Bookmark" navigation={this.props.navigation}/>
                     <DrawerItem iconName="md-pricetag" title={String.tags} screenIndex={8} screen="Tags" navigation={this.props.navigation}/>
                     <DrawerItem iconName="md-settings" title={String.settings} screenIndex={9} navigation={this.props.navigation}/>
 

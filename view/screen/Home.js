@@ -7,6 +7,7 @@ import QuestionList from "../component/question/QuestionList";
 import AnnouncementList from "../component/announcement/AnnouncementList";
 import Screen from './Screen';
 import Setting from "../../constant/Setting";
+import JSHelper from "../../utils/JSHelper";
 
 
 class Home extends Screen
@@ -25,9 +26,7 @@ class Home extends Screen
 
     loadQuestion = (offset = 0) =>
     {
-        let {state} = this.props.navigation;
-        let params = state.params === undefined ? {} : state.params;
-        let type = params.type === undefined ?  1 : params.type;
+        let type = JSHelper.getScreenParams(this.props.navigation , "type" , 1);
         let lang = Setting.settings.lang;
 
         this.props.dispatch(fetchRecentQuestionsWithAnnouncements(type , lang , offset, this.props.requestId));
@@ -63,10 +62,7 @@ class Home extends Screen
 
     title = () =>
     {
-        let {state} = this.props.navigation;
-        let params = state.params === undefined ? {} : state.params;
-        let type = params.type === undefined ?  1 : params.type;
-
+        let type = JSHelper.getScreenParams(this.props.navigation , "type" , 1);
         return type === 1 ? String.feqh : String.aqaed;
     }
 

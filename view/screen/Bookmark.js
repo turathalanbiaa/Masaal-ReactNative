@@ -5,22 +5,25 @@ import String from './../../res/string/String';
 import QuestionList from "../component/question/QuestionList";
 import Screen from './Screen';
 import {fetchMyQuestions} from "../../redux/actions/questionActions";
-import Setting from "../../constant/Setting";
-import DeviceInfo from 'react-native-device-info';
 
-class MyQuestions extends Screen
+
+class Bookmark extends Screen
 {
+
+    constructor(props)
+    {
+        super(props);
+    }
+
     componentDidMount()
     {
-        I18nManager.forceRTL(Setting.isRTL());
-        let uuid = DeviceInfo.getUniqueID();
-        this.props.dispatch(fetchMyQuestions(uuid , this.props.requestId));
+        I18nManager.forceRTL(false);
+        this.props.dispatch(fetchMyQuestions(this.props.requestId));
     }
 
     _onRefresh = () =>
     {
-        let uuid = DeviceInfo.getUniqueID();
-        this.props.dispatch(fetchMyQuestions(uuid , this.props.requestId));
+        this.props.dispatch(fetchMyQuestions(this.props.requestId));
     };
 
 
@@ -58,4 +61,4 @@ export default connect((state) =>
         questions: state.question.questions,
         requestId: state.question.requestId
     }
-})(MyQuestions);
+})(Bookmark);

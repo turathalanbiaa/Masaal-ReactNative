@@ -10,7 +10,8 @@ export default class Link
         recent : Link.MAIN_API + "question/recent",
         send : Link.MAIN_API + "question/new",
         search : Link.MAIN_API + "question/search",
-        searchByTag : Link.MAIN_API + "question/searchByTag"
+        searchByTag : Link.MAIN_API + "question/searchByTag",
+        my : Link.MAIN_API + "question/my"
     };
 
     static tag = {
