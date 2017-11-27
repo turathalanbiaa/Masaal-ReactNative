@@ -14,6 +14,10 @@ export default class Link
         my : Link.MAIN_API + "question/my"
     };
 
+    static settings = {
+        changeName : Link.MAIN_API + "settings/change/name"
+    };
+
     static tag = {
         all : Link.MAIN_API + "tag/all"
     };

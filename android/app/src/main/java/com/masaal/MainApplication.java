@@ -3,6 +3,7 @@ package com.masaal;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.avishayil.rnrestart.ReactNativeRestartPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import cl.json.RNSharePackage;
 import com.rnfs.RNFSPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeRestartPackage(),
             new RNDeviceInfo(),
             new RNSharePackage(),
             new RNFSPackage(),

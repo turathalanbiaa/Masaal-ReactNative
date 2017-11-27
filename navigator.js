@@ -10,9 +10,11 @@ import Search from "./view/screen/Search";
 import SearchResult from './view/screen/SearchResult';
 import Tag from "./view/screen/Tag";
 import Bookmark from "./view/screen/Bookmark";
+import Setting from "./constant/Setting";
+import SplashScreen from "./view/screen/SplashScreen";
 
 const AppNavigation = StackNavigator({
-
+    Splash : {screen : SplashScreen},
     Home : {screen : HomeScreen},
     Posts : {screen : PostsScreen} ,
     MyQuestions : {screen : MyQuestionsScreen} ,
