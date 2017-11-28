@@ -59,15 +59,16 @@ const styles = StyleSheet.create({
     image :{
         width : 32 ,
         height : 32 ,
-        marginLeft : I18nManager.isRTL ? 8 : 0,
-        marginRight : I18nManager.isRTL ? 0 : 8
+        marginRight : 8
     },
     primaryText : {
         fontSize : 16 ,
-        fontFamily : 'JF Flat'
+        fontFamily : 'JF Flat',
+        textAlign : 'left'
     },
     secondaryText : {
         fontSize : 12,
-        fontFamily : 'JF Flat'
+        fontFamily : 'JF Flat',
+        textAlign : 'left'
     }
 });

@@ -82,7 +82,7 @@ export default class Post extends PureComponent
 
                     <PostHeader time={post.time}/>
 
-                    <H3 style={styles.topDownSpace}>{post.title}</H3>
+                    <H3 style={[styles.topDownSpace , {textAlign:'left'}]}>{post.title}</H3>
                     <Divider/>
 
                     <Text style={[styles.topDownSpace , styles.paragraph]}>{post.content.trim()}</Text>
@@ -123,5 +123,6 @@ const styles = StyleSheet.create({
         fontSize: 14 ,
         color : '#777777' ,
         fontFamily : 'JF Flat',
+        textAlign : 'left'
     }
 });
