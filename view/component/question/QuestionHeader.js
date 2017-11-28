@@ -45,6 +45,10 @@ export default class QuestionHeader extends Component
         time = time.replace("$hours$" , String.hour);
         time = time.replace("$minutes$" , String.minute);
         time = time.replace("$seconds$" , String.second);
+
+        if (time.includes('NaN'))
+            return '';
+
         return time;
     }
 }
@@ -66,8 +70,7 @@ const styles = StyleSheet.create({
     image :{
         width : 32 ,
         height : 32 ,
-        marginLeft : I18nManager.isRTL ? 8 : 0,
-        marginRight : I18nManager.isRTL ? 0 : 8
+        marginRight : 8
     },
     primaryText : {
         fontSize : 13 ,

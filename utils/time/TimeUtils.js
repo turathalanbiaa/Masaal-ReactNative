@@ -8,6 +8,7 @@ export default class TimeUtils
         let seconds = Math.floor((new Date() - time) / 1000);
         let interval = Math.floor(seconds / 31536000);
 
+
         if (interval > 1) {
             return interval + " $years$";
         }
