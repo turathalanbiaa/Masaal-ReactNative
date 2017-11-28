@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import FeqhCategoryPicker from "../component/question/FeqhCategoryPicker";
 import AqeadCategoryPicker from "../component/question/AqeadCategoryPicker";
 import QuestionTypeRadio from "../component/question/QuestionTypeRadio";
+import Setting from "../../constant/Setting";
 
 class Search extends Screen
 {
@@ -48,6 +49,7 @@ class Search extends Screen
                             <Input
                                 placeholder={String.search}
                                 onChangeText={(text) => this.setState({text : text})}
+                                style={{textAlign : Setting.isRTL() ? 'right' : 'left'}}
                                 autoCapitalize="none" editable={!this.props.sending} autoCorrect={false} multiline={true}/>
                         </Item>
 

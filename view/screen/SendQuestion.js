@@ -9,6 +9,7 @@ import DeviceInfo from 'react-native-device-info';
 import QuestionTypeRadio from "../component/question/QuestionTypeRadio";
 import QuestionPrivacyRadio from "../component/question/QuestionPrivacyRadio";
 import Toaster from "../../utils/ui/Toaster";
+import Setting from "../../constant/Setting";
 
 
 let input = null;
@@ -59,7 +60,7 @@ class SendQuestion extends Screen
                             ref={component => input = component}
                             placeholder={String.what_is_your_question}
                             autoCapitalize="none" editable={!this.props.sending} autoCorrect={false} multiline={true}
-                            style={{height: 150}}/>
+                            style={{height: 150 , textAlign : Setting.isRTL() ? 'right' : 'left'}}/>
 
                     </Item>
 
