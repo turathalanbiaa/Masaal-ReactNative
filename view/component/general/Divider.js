@@ -6,12 +6,13 @@ export default class Divider extends Component
     render()
     {
         return (
-            <View style={{height : this.props.weight , flex : 1 , backgroundColor : this.props.color}}/>
+            <View style={[{height : this.props.weight , flex : 1 , backgroundColor : this.props.color} , this.props.style]}/>
         );
     }
 }
 
 Divider.defaultProps = {
     weight : 2 ,
-    color : '#AAAAAA'
+    color : '#AAAAAA',
+    style : {}
 };

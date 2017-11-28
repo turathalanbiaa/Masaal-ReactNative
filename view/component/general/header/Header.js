@@ -8,15 +8,15 @@ export default class Header extends Component
     render()
     {
         return (
-            <NBHeader>
+            <NBHeader style={{backgroundColor : '#3F51B5'}}>
 
                 <Left>
                     {
-                        this.props.left === null ? <Button onPress={this.props.onDrawer} transparent><Icon name='menu'/></Button> : this.props.left
+                        this.props.left === null ? <Button onPress={this.props.onDrawer} transparent><Icon style={{color : '#FFFFFF'}} name='menu'/></Button> : this.props.left
                     }
                 </Left>
 
-                <Body><Title>{this.props.title}</Title></Body>
+                <Body><Title style={{color : '#FFFFFF'}}>{this.props.title}</Title></Body>
 
                 <Right>{this.props.right}</Right>
 

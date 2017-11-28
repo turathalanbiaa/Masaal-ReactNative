@@ -80,6 +80,7 @@ export default class Question extends PureComponent
                 <View style={styles.container}>
 
                     <QuestionHeader name={question.userDisplayName} category={question.category} time={question.time}/>
+                    <Divider style={{marginTop : 6}}/>
                     <QuestionText style={styles.topDownSpace} content={question.content} title={String.the_question}/>
 
                     {

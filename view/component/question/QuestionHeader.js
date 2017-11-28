@@ -70,8 +70,10 @@ const styles = StyleSheet.create({
         marginRight : I18nManager.isRTL ? 0 : 8
     },
     primaryText : {
-        fontSize : 16 ,
-        fontFamily : 'JF Flat'
+        fontSize : 13 ,
+        marginBottom : 6,
+        fontFamily : 'JF Flat',
+        textAlign : 'left',
     },
     secondaryText : {
         fontSize : 12,

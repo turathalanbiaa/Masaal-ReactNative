@@ -23,9 +23,11 @@ const styles = StyleSheet.create({
         marginBottom : 8,
         fontSize : 16 ,
         color : '#2B2B2B' ,
-        fontFamily : Platform.OS ==="ios" ? 'CoconNextArabic-Light' : 'cocon'
+        fontFamily : Platform.OS ==="ios" ? 'CoconNextArabic-Light' : 'cocon',
+        textAlign : 'left'
     },
     paragraph : {
+        textAlign : 'left',
         fontSize: 14 ,
         color : '#777777' ,
         fontFamily : 'JF Flat',
