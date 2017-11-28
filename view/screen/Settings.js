@@ -88,6 +88,7 @@ export default class Settings extends Screen
                             <Input
                                 ref={component => nameInput = component}
                                 placeholder={String.your_name}
+                                style={{textAlign : Setting.isRTL() ? 'right' : 'left'}}
                                 autoCapitalize="none" editable={!this.props.sending} autoCorrect={false} multiline={true}
                             />
                         </Item>

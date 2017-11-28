@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import String from './../../res/string/String';
 import TagList from "../component/tag/TagList";
 import {getTags} from "../../redux/actions/tagActions";
+import Setting from "../../constant/Setting";
 
 
 class Tag extends Screen
@@ -18,13 +19,15 @@ class Tag extends Screen
     componentDidMount()
     {
         I18nManager.forceRTL(false);
-        this.props.dispatch(getTags(this.props.requestId));
+        let lang = Setting.settings.lang;
+        this.props.dispatch(getTags(lang , this.props.requestId));
     }
 
 
     _onRefresh = () =>
     {
-        this.props.dispatch(getTags(this.props.requestId));
+        let lang = Setting.settings.lang;
+        this.props.dispatch(getTags(lang , this.props.requestId));
     };
 
 
