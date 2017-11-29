@@ -4,6 +4,9 @@ import Navigator from './navigator';
 import {addNavigationHelpers} from 'react-navigation';
 import {connect , Provider} from 'react-redux';
 import store from './redux/store';
+import FirebaseNotification from "./FirebaseNotification";
+
+import {NavigationActions} from 'react-navigation';
 
 class App extends React.Component
 {
@@ -29,11 +32,17 @@ const AppWithNavigationState = connect(mapStateToProps)(App);
 
 class FirstRoot extends React.Component
 {
+    constructor(props)
+    {
+        super(props);
+    }
+
     render() {
         return (
             <Provider store={store}>
                 <Root>
-                    <AppWithNavigationState />
+                    <FirebaseNotification/>
+                    <AppWithNavigationState/>
                 </Root>
             </Provider>
         );

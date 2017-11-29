@@ -5,6 +5,8 @@ import {NavigationActions} from 'react-navigation';
 import {Image} from 'react-native-animatable';
 import String from './../../res/string/String';
 
+import FCM from 'react-native-fcm';
+
 export default class SplashScreen extends Component
 {
 
@@ -14,9 +16,31 @@ export default class SplashScreen extends Component
         this.state = {image : 1 , loadingSettingsDone: false};
     }
 
-    componentDidMount()
+    async componentDidMount()
     {
-        Setting.loadSettings().then(() => this.setState({loadingSettingsDone : true}));
+        await Setting.loadSettings().then(() => this.setState({loadingSettingsDone: true}));
+
+
+        FCM.getInitialNotification().then(notif =>
+        {
+            if (notif === undefined || !notif.type)
+            {
+                this.gotoHomeScreen();
+            }
+            else
+            {
+                if (notif !== undefined && notif.type === "3")
+                {
+                    const {navigate} = this.props.navigation;
+                    navigate('Posts', {type: 1});
+                }
+            }
+        });
+
+    }
+
+    gotoHomeScreen = ()=>
+    {
         setTimeout(() =>
         {
             const resetAction = NavigationActions.reset({
@@ -26,8 +50,8 @@ export default class SplashScreen extends Component
                 ]
             });
             this.props.navigation.dispatch(resetAction);
-        } , 4000)
-    }
+        } , 4000);
+    };
 
     render()
     {
@@ -37,7 +61,8 @@ export default class SplashScreen extends Component
                 {
                     this.state.image === 1 ?
                         <Image style={{width : 128 , height : 116}} animation="fadeOut" source={require('./../../res/image/icon/logo_1.png')}
-                               delay={1000}
+                               delay={1500}
+                               duration={500}
                                onAnimationEnd={() => this.setState({image : 2})}/>
                         :
                         <Image style={{width : 128 , height : 116}} animation="fadeIn" source={require('./../../res/image/icon/logo_2.png')}/>
