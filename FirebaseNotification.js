@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 
 import {Platform} from 'react-native';
 import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
+import Http from "./utils/networking/Http";
+import Link from "./constant/Link";
+import DeviceInfo from 'react-native-device-info';
+import Setting from "./constant/Setting";
 
 FCM.on(FCMEvent.Notification, async (notif) =>
 {
@@ -43,8 +47,22 @@ FCM.on(FCMEvent.Notification, async (notif) =>
 
 FCM.on(FCMEvent.RefreshToken, (token) =>
 {
-    console.log("token ", token);
+    console.log("refresh token ", token);
+    sendFirebaseToken(token);
 });
+
+function sendFirebaseToken(token)
+{
+    let url = Link.settings.firebaseToken;
+    let uuid = DeviceInfo.getUniqueID();
+    Http.post(url , {deviceUUID : uuid , token : token}).then(() =>
+    {
+        Setting.setFirebaseTokenSent('1');
+    }).catch(() =>
+    {
+        Setting.setFirebaseTokenSent('0');
+    });
+}
 
 export default class FirebaseNotification extends Component
 {
@@ -56,9 +74,15 @@ export default class FirebaseNotification extends Component
             .then(() => console.log('granted'))
             .catch(() => console.log('notification permission rejected'));
 
-        FCM.getFCMToken().then(token =>
+        FCM.getFCMToken().then(async token =>
         {
-            console.log('token', token)
+            console.log('token', token);
+            let isFirebaseTokenSent = await Setting.isFirebaseTokenSent();
+            if (isFirebaseTokenSent)
+            {
+                sendFirebaseToken(token)
+            }
+
         });
 
         this.notificationListener = FCM.on(FCMEvent.Notification, async (notif) =>

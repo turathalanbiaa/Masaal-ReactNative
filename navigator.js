@@ -10,8 +10,8 @@ import Search from "./view/screen/Search";
 import SearchResult from './view/screen/SearchResult';
 import Tag from "./view/screen/Tag";
 import Bookmark from "./view/screen/Bookmark";
-import Setting from "./constant/Setting";
 import SplashScreen from "./view/screen/SplashScreen";
+import Setup from "./view/screen/Setup";
 
 const AppNavigation = StackNavigator({
     Splash : {screen : SplashScreen},
@@ -23,7 +23,8 @@ const AppNavigation = StackNavigator({
     SearchResult : {screen : SearchResult} ,
     Bookmark : {screen : Bookmark} ,
     Tags : {screen : Tag} ,
-    Settings : {screen : SettingsScreen}
+    Settings : {screen : SettingsScreen},
+    Setup : {screen : Setup}
 }, {navigationOptions : { header: null }});
 
 export default AppNavigation;

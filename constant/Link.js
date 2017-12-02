@@ -15,7 +15,9 @@ export default class Link
     };
 
     static settings = {
-        changeName : Link.MAIN_API + "settings/change/name"
+        changeName : Link.MAIN_API + "settings/change/name" ,
+        firebaseToken : Link.MAIN_API + "notification/set-firebase-token" ,
+        setup : Link.MAIN_API + "setup"
     };
 
     static tag = {

@@ -1,4 +1,5 @@
 import Setting from "../../constant/Setting";
+import 'proxy-polyfill';
 
 let lang = {
     "ar": {
@@ -271,6 +272,6 @@ let lang = {
     }
 };
 
-export const string = lang.ar;//new Proxy(lang, {get: function (object, name) {return object[Setting.settings.lang][name]}});
+export const string = new Proxy(lang, {get: function (object, name) {return object[Setting.settings.lang][name]}});
 export default string;
 

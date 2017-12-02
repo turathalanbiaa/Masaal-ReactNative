@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View , TouchableOpacity, StyleSheet} from 'react-native';
-import {Icon, Body, Text} from 'native-base';
+import {Icon, Text} from 'native-base';
 import {NavigationActions} from 'react-navigation';
 
 
@@ -9,8 +9,6 @@ export default class DrawerItem extends Component
 
     onPressed = () =>
     {
-        const {navigate} = this.props.navigation;
-
         const resetAction = NavigationActions.reset({
             index: 0,
             actions: [

@@ -20,17 +20,26 @@ export default class SplashScreen extends Component
     {
         await Setting.loadSettings().then(() => this.setState({loadingSettingsDone: true}));
 
+        console.log(Setting.settings);
 
         FCM.getInitialNotification().then(notif =>
         {
             if (notif === undefined || !notif.type)
             {
-                this.gotoHomeScreen();
+                if (Setting.isSetupComplete())
+                {
+                    this.gotoHomeScreen();
+                }
+                else
+                {
+                    this.gotoSetupScreen();
+                }
             }
             else
             {
                 if (notif !== undefined && notif.type === "3")
                 {
+                    //todo : show screen according to type
                     const {navigate} = this.props.navigation;
                     navigate('Posts', {type: 1});
                 }
@@ -47,6 +56,20 @@ export default class SplashScreen extends Component
                 index: 0,
                 actions: [
                     NavigationActions.navigate({ routeName: 'Home' , params : {type : 1}}),
+                ]
+            });
+            this.props.navigation.dispatch(resetAction);
+        } , 4000);
+    };
+
+    gotoSetupScreen = ()=>
+    {
+        setTimeout(() =>
+        {
+            const resetAction = NavigationActions.reset({
+                index: 0,
+                actions: [
+                    NavigationActions.navigate({ routeName: 'Setup' , params : {type : 1}}),
                 ]
             });
             this.props.navigation.dispatch(resetAction);

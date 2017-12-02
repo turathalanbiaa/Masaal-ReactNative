@@ -50,6 +50,7 @@ export default class Settings extends Screen
         {
             if (response.success)
             {
+                Setting.changeName(name);
                 Toaster.show(String.name_has_been_changed , 'success')
             }
             else

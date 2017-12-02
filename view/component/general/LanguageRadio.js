@@ -20,7 +20,7 @@ export default class LanguageRadio extends Component
     {
         return (
             <View style={{marginTop : 18 , marginLeft: 12 , marginRight : 12 , alignItems : 'flex-start'}}>
-                <Text>{String.choose_language}</Text>
+                <Text>{this.props.label === null ? String.choose_language : this.props.label}</Text>
                 <RadioForm
                     style={{alignItems : 'flex-start' , marginTop : 6}}
                     radio_props={languages}
@@ -33,5 +33,6 @@ export default class LanguageRadio extends Component
 }
 
 LanguageRadio.defaultProps = {
-    thirdOption : true
+    thirdOption : true ,
+    label : null
 };
