@@ -1,6 +1,3 @@
-import Setting from "../../constant/Setting";
-import 'proxy-polyfill';
-
 let lang = {
     "ar": {
         the_question: 'السؤال : ',
@@ -272,6 +269,26 @@ let lang = {
     }
 };
 
-export const string = new Proxy(lang, {get: function (object, name) {return object[Setting.settings.lang][name]}});
-export default string;
+let currentLang = 'en';
+let local = require('react-native-device-info').getDeviceLocale();
+console.log('current local' , local);
+if(local.includes('en'))
+    currentLang = 'en';
+else if(local.includes('fr'))
+    currentLang = "fr";
+else if (local.includes("ar"))
+    currentLang = "ar";
+
+
+Object.keys(Object.values( lang )[0]).forEach( function(key)
+{
+    Object.defineProperty(lang, key, {
+        get: function() { return this[currentLang][ key ] }
+    });
+});
+
+export default lang;
+
+//export const string = new Proxy(lang, {get: function (object, name) {return object[Setting.settings.lang][name]}});
+//export default string;
 

@@ -14,7 +14,7 @@ export default class Screen extends Component
 
     componentWillMount()
     {
-        I18nManager.forceRTL(Setting.isRTL());
+        // I18nManager.forceRTL(Setting.isRTL());
     }
 
     closeDrawer = () =>

@@ -1,10 +1,11 @@
 import {AsyncStorage} from 'react-native';
+import DeviceInfo from 'react-native-device-info';
 
 const STORE = "@SETTING";
 export default class Setting
 {
     static settings = {
-        lang : 'en' ,
+        lang : DeviceInfo.getDeviceLocale() ,
         name : '' ,
         isFirebaseTokenSent : false ,
         setupComplete : '0'
@@ -19,10 +20,23 @@ export default class Setting
 
     static async loadSettings()
     {
-        Setting.settings.lang = await Setting.load(Setting.keys.lang , 'ar');
+        Setting.settings.lang = Setting.getCurrentLanguage();
         Setting.settings.name = await Setting.load(Setting.keys.name , '');
         Setting.settings.firebaseTokenSent = await Setting.load(Setting.keys.isFirebaseTokenSent , '0');
         Setting.settings.setupComplete = await Setting.load(Setting.keys.setupComplete , '0');
+    }
+
+    static getCurrentLanguage()
+    {
+        let local = DeviceInfo.getDeviceLocale();
+        if (local.includes("en"))
+            return "en";
+        else if(local.includes("fr"))
+            return "fr";
+        else if (local.includes("ar"))
+            return "ar";
+
+        return "en";
     }
 
     static async load(key , defaultValue = null)
@@ -40,16 +54,6 @@ export default class Setting
             {
                 resolve(defaultValue)
             });
-        });
-    }
-
-    static changeLanguage(lang , callback)
-    {
-        let key = STORE + ":" + Setting.keys.lang;
-        AsyncStorage.setItem(key , lang).then(() =>
-        {
-            Setting.settings.lang = lang;
-            callback();
         });
     }
 
@@ -86,7 +90,7 @@ export default class Setting
 
     static isRTL()
     {
-        return Setting.settings.lang === "ar";
+        return Setting.getCurrentLanguage() === "ar";
     }
 
 }

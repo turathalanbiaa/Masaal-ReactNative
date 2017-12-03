@@ -18,15 +18,14 @@ class Tag extends Screen
 
     componentDidMount()
     {
-        I18nManager.forceRTL(false);
-        let lang = Setting.settings.lang;
+        let lang = Setting.getCurrentLanguage();
         this.props.dispatch(getTags(lang , this.props.requestId));
     }
 
 
     _onRefresh = () =>
     {
-        let lang = Setting.settings.lang;
+        let lang = Setting.getCurrentLanguage();
         this.props.dispatch(getTags(lang , this.props.requestId));
     };
 

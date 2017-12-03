@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-import {View , Platform , I18nManager} from 'react-native';
+import {View , Platform} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import {Container , Content , Form , Input , Item ,Button , Text , Spinner} from 'native-base';
 import Header from "../component/general/header/Header";
@@ -7,9 +7,8 @@ import Http from "../../utils/networking/Http";
 import Link from "../../constant/Link";
 import FCM from 'react-native-fcm';
 import Setting from "../../constant/Setting";
-import LanguageRadio from "../component/general/LanguageRadio";
 import Toaster from "../../utils/ui/Toaster";
-import RNRestart from 'react-native-restart'
+import {NavigationActions} from 'react-navigation';
 
 let nameInput;
 
@@ -24,11 +23,8 @@ export default class Setup extends Component
             title : '' ,
             saveButton : '',
             placeHolder : '',
-            chooseLang : '' ,
-            initialLang : 'ar',
             errorSendMessage : '',
 
-            lang : 'ar',
             sending : false
         };
 
@@ -54,33 +50,20 @@ export default class Setup extends Component
         }
     }
 
-
-    onLanguageChanged = (lang) =>
-    {
-        switch (lang)
-        {
-            case 'ar': this.setAr();break;
-            case 'en': this.setEn();break;
-            case 'fr': this.setFr();break;
-        }
-    };
-
     save = async () =>
     {
         let deviceUUID = DeviceInfo.getUniqueID();
         let name = nameInput._root._lastNativeText.trim();
-        let lang = this.state.lang;
         let token = await FCM.getFCMToken();
 
         if (name === "")
             return;
 
-        this.setup(deviceUUID , token , name , lang);
+        this.setup(deviceUUID , token , name);
     };
 
-    setup = (deviceUUID , token , name , lang) =>
+    setup = (deviceUUID , token , name) =>
     {
-        Setting.changeLanguage(lang , () => {});
         let params = {
             deviceUUID : deviceUUID ,
             token : token ,
@@ -95,8 +78,14 @@ export default class Setup extends Component
             await Setting.changeName(name);
             setTimeout(() =>
             {
-                I18nManager.forceRTL(Setting.isRTL());
-                RNRestart.Restart();
+                const resetAction = NavigationActions.reset({
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({ routeName: 'Home' , params : {type : 1}}),
+                    ]
+                });
+                this.props.navigation.dispatch(resetAction);
+
             } , 1500);
 
         }).catch(() =>
@@ -127,8 +116,6 @@ export default class Setup extends Component
                             />
                         </Item>
 
-                        <LanguageRadio initial={this.state.initialLang} onPress={this.onLanguageChanged}/>
-
                     </Form>
 
                     {
@@ -145,8 +132,8 @@ export default class Setup extends Component
         )
     }
 
-    setAr = () => {this.setState({title : 'الاجوبة الميسرة', errorSendMessage : 'فشل : تحقق من الاتصال بالنترنت' , chooseLang : 'اختر اللغة' , saveButton : 'حفظ' , placeHolder : 'اكتب اسمك هنا' , lang : 'ar'})};
-    setEn = () => {this.setState({title : 'App Titlt En' , errorSendMessage : "Fail : Check your internet connection" , chooseLang : 'Choose Language' , saveButton : 'Save' , placeHolder : 'Write Your Name Here' , lang : 'en'})};
-    setFr = () => {this.setState({title : 'App Titlt Fr' , errorSendMessage : "Fail : Check your internet connection Fr" , chooseLang : 'Choose Language Fr', saveButton : 'Save Fr' , placeHolder : 'Write Your Name Here Fr' , lang : 'fr'})};
+    setAr = () => {this.setState({title : 'الاجوبة الميسرة', errorSendMessage : 'فشل : تحقق من الاتصال بالانترنت' , saveButton : 'حفظ' , placeHolder : 'اكتب اسمك هنا' , lang : 'ar'})};
+    setEn = () => {this.setState({title : 'App Titlt En' , errorSendMessage : "Fail : Check your internet connection" , saveButton : 'Save' , placeHolder : 'Write Your Name Here' , lang : 'en'})};
+    setFr = () => {this.setState({title : 'App Titlt Fr' , errorSendMessage : "Fail : Check your internet connection Fr" , saveButton : 'Save Fr' , placeHolder : 'Write Your Name Here Fr' , lang : 'fr'})};
 
 }

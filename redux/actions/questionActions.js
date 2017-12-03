@@ -47,7 +47,7 @@ export function searchByTag(tagId, requestId)
     return fetchQuestions(Link.question.searchByTag , {tagId: tagId} , requestId);
 }
 
-export function sendQuestion(text, type, privacy, uuid)
+export function sendQuestion(text , lang, type, privacy, uuid)
 {
     return function (dispatch)
     {
@@ -56,7 +56,7 @@ export function sendQuestion(text, type, privacy, uuid)
         let params = {
             content: text,
             type: type,
-            lang: 'en',
+            lang: lang,
             privacy: privacy,
             deviceUUID: uuid
         };

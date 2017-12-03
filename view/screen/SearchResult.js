@@ -1,5 +1,5 @@
 import React from 'react';
-import {View , I18nManager} from 'react-native';
+import {View , BackAndroid} from 'react-native';
 import Screen from './Screen';
 import {connect} from 'react-redux';
 import String from './../../res/string/String';
@@ -12,18 +12,29 @@ class SearchResult extends Screen
 
     componentDidMount()
     {
-        I18nManager.forceRTL(false);
         let {params} = this.props.navigation.state;
 
         if (params.tagId !== undefined)
         {
-            console.log(params);
             this.props.dispatch(searchByTag(params.tagId , this.props.requestId));
         }
         else
         {
             this.props.dispatch(search(params.text, params.category , this.props.requestId));
         }
+
+        BackAndroid.addEventListener('backPress', () =>
+        {
+            const { dispatch } = this.props;
+            dispatch({type: 'Navigation/BACK'});
+            return true
+        });
+
+    }
+
+    componentWillUnmount()
+    {
+        BackAndroid.removeEventListener('backPress')
     }
 
 

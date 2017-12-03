@@ -13,7 +13,6 @@ class Bookmark extends Screen
 
     componentDidMount()
     {
-        I18nManager.forceRTL(Setting.isRTL());
         this.props.dispatch(getBookmark(this.props.requestId));
     }
 

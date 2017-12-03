@@ -1,4 +1,4 @@
-package com.masaal;
+package com.turathalanbiaa.masaal;
 
 import android.app.Application;
 

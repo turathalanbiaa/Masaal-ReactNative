@@ -8,7 +8,7 @@ export default class QuestionText extends Component
         return (
             <View style={this.props.style}>
                 <Text style={styles.primaryText}>{this.props.title}</Text>
-                <Text style={styles.paragraph}>{this.props.content}</Text>
+                <Text selectable={true} style={styles.paragraph}>{this.props.content}</Text>
             </View>
         );
     }

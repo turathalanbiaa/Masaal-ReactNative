@@ -1,7 +1,7 @@
 import React from 'react';
-import {View} from 'native-base';
 import Screen from './Screen';
 import String from './../../res/string/String';
+import {View} from 'react-native';
 import {Content, Item, Input, Text, Button, Form, Spinner, Toast} from 'native-base';
 import {connect} from 'react-redux';
 import {sendQuestion} from "../../redux/actions/questionActions";
@@ -31,7 +31,8 @@ class SendQuestion extends Screen
 
         let uuid = DeviceInfo.getUniqueID();
         let text = input._root._lastNativeText;
-        this.props.dispatch(sendQuestion(text, this.state.type, this.state.privacy, uuid));
+        let lang = Setting.getCurrentLanguage();
+        this.props.dispatch(sendQuestion(text , lang, this.state.type, this.state.privacy, uuid));
 
     };
 
@@ -59,8 +60,8 @@ class SendQuestion extends Screen
                         <Input
                             ref={component => input = component}
                             placeholder={String.what_is_your_question}
-                            autoCapitalize="none" editable={!this.props.sending} autoCorrect={false} multiline={true}
-                            style={{height: 150 , textAlign : Setting.isRTL() ? 'right' : 'left'}}/>
+                            autoCapitalize="none" editable={!this.props.sending} autoCorrect={false} multiline={true} numberOfLines={5} autoGrow={true}
+                            style={{textAlign : Setting.isRTL() ? 'right' : 'left'}}/>
 
                     </Item>
 
@@ -80,8 +81,10 @@ class SendQuestion extends Screen
                     this.props.sending ?
                         <Spinner color='blue'/>
                         :
-                        <Button full rounded onPress={this._sendQuestion}
-                                style={{marginTop: 20}}><Text>{String.send}</Text></Button>
+                        <View>
+                            <Button full rounded onPress={this._sendQuestion} style={{marginTop: 20}}><Text>{String.send}</Text></Button>
+                            <View style={{padding : 12}}/>
+                        </View>
                 }
 
             </Content>

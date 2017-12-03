@@ -85,7 +85,7 @@ export default class Post extends PureComponent
                     <H3 style={[styles.topDownSpace , {textAlign:'left'}]}>{post.title}</H3>
                     <Divider/>
 
-                    <Text style={[styles.topDownSpace , styles.paragraph]}>{post.content.trim()}</Text>
+                    <Text selectable={true} style={[styles.topDownSpace , styles.paragraph]}>{post.content.trim()}</Text>
 
                     {
                         (post.image !== null && post.image.trim() !== "")

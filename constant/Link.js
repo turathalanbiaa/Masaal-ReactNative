@@ -2,7 +2,7 @@
 
 export default class Link
 {
-    static MAIN_LINK = "http://localhost:8000/";
+    static MAIN_LINK = "http://192.168.0.118:8000/";
     static MAIN_API = Link.MAIN_LINK + "api/";
     static IMAGES = Link.MAIN_LINK + "storage/images/";
 

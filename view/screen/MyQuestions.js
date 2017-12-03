@@ -12,7 +12,6 @@ class MyQuestions extends Screen
 {
     componentDidMount()
     {
-        I18nManager.forceRTL(Setting.isRTL());
         let uuid = DeviceInfo.getUniqueID();
         this.props.dispatch(fetchMyQuestions(uuid , this.props.requestId));
     }

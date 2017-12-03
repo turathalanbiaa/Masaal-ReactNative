@@ -1,15 +1,13 @@
 import React from 'react';
-import {View , I18nManager , Platform} from 'react-native';
+import {View , Platform} from 'react-native';
 import Screen from './Screen';
 import String from './../../res/string/String';
 import {Content, Item, Input, Button, Form, Spinner , Icon} from 'native-base';
-import LanguageRadio from "../component/general/LanguageRadio";
 import Setting from "../../constant/Setting";
 import Http from "../../utils/networking/Http";
 import Link from "../../constant/Link";
 import DeviceInfo from 'react-native-device-info';
 import Toaster from "../../utils/ui/Toaster";
-import RNRestart from 'react-native-restart'; // Import package from node modules
 
 let nameInput = null;
 
@@ -18,12 +16,11 @@ export default class Settings extends Screen
     constructor(props)
     {
         super(props);
-        this.state = {lang: Setting.settings.lang , sending : false };
+        this.state = {sending : false };
     }
 
     componentDidMount()
     {
-        I18nManager.forceRTL(Setting.isRTL());
         let name = Setting.settings.name.trim() === "" ? String.new_user : Setting.settings.name;
         nameInput.setNativeProps({text: name});
         nameInput._root._lastNativeText = name;
@@ -67,18 +64,8 @@ export default class Settings extends Screen
 
     };
 
-    changeLanguage = (value) =>
-    {
-        Setting.changeLanguage(value , () =>
-        {
-            I18nManager.forceRTL(Setting.isRTL());
-            RNRestart.Restart();
-        });
-    };
-
     renderContent()
     {
-        console.log(this.state.lang);
         return (
             <Content style={{padding: 8}}>
 
@@ -103,13 +90,6 @@ export default class Settings extends Screen
                                     }
                                 </Button>
                     </View>
-
-                    {
-                        this.state.lang === '' ?
-                            null
-                            :
-                            <LanguageRadio initial={this.state.lang} onPress={this.changeLanguage}/>
-                    }
 
                 </Form>
 

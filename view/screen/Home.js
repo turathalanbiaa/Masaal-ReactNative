@@ -15,7 +15,6 @@ class Home extends Screen
 
     componentDidMount()
     {
-        I18nManager.forceRTL(Setting.isRTL());
         this.loadQuestion();
     }
 
@@ -27,7 +26,7 @@ class Home extends Screen
     loadQuestion = (offset = 0) =>
     {
         let type = JSHelper.getScreenParams(this.props.navigation , "type" , 1);
-        let lang = Setting.settings.lang;
+        let lang = Setting.getCurrentLanguage();
 
         this.props.dispatch(fetchRecentQuestionsWithAnnouncements(type , lang , offset, this.props.requestId));
     };
