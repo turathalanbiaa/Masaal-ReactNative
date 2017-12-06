@@ -137,6 +137,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-snackbar')
     compile project(':react-native-fcm')
     compile project(':react-native-restart')
     compile project(':react-native-device-info')

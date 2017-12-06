@@ -2,15 +2,14 @@ import React from 'react';
 import Screen from './Screen';
 import String from './../../res/string/String';
 import {View} from 'react-native';
-import {Content, Item, Input, Text, Button, Form, Spinner, Toast} from 'native-base';
+import {Content, Item, Input, Text, Button, Form, Spinner} from 'native-base';
 import {connect} from 'react-redux';
 import {sendQuestion} from "../../redux/actions/questionActions";
 import DeviceInfo from 'react-native-device-info';
 import QuestionTypeRadio from "../component/question/QuestionTypeRadio";
 import QuestionPrivacyRadio from "../component/question/QuestionPrivacyRadio";
-import Toaster from "../../utils/ui/Toaster";
 import Setting from "../../constant/Setting";
-
+import Snackbar from 'react-native-snackbar';
 
 let input = null;
 
@@ -41,7 +40,11 @@ class SendQuestion extends Screen
         let text = input._root._lastNativeText;
         if (text.trim().length <= 10)
         {
-            Toaster.show(String.question_length_must_be_more_than_10_letters , 'danger');
+            Snackbar.show({
+                title: String.question_length_must_be_more_than_10_letters,
+                duration: Snackbar.LENGTH_LONG,
+                backgroundColor : '#E91E63'
+            });
             return false;
         }
         return true;
@@ -87,6 +90,7 @@ class SendQuestion extends Screen
                         </View>
                 }
 
+
             </Content>
         )
     }
@@ -103,7 +107,11 @@ export default connect((store) =>
     {
         if (store.sendQuestionReducer.success)
         {
-            Toast.show({text: String.question_sent, type: 'success', position: 'bottom', duration: 3000});
+            Snackbar.show({
+                title: String.question_sent,
+                duration: Snackbar.LENGTH_LONG,
+                backgroundColor : '#009688'
+            });
 
             if (input !== null)
             {
@@ -113,7 +121,11 @@ export default connect((store) =>
         }
         else
         {
-            Toast.show({text: String.question_didnot_sent, type: 'danger', position: 'bottom', duration: 3000});
+            Snackbar.show({
+                title: String.question_didnot_sent,
+                duration: Snackbar.LENGTH_LONG,
+                backgroundColor : '#E91E63'
+            });
         }
     }
 

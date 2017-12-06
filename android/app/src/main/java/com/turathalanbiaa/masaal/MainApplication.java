@@ -3,6 +3,7 @@ package com.turathalanbiaa.masaal;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.azendoo.reactnativesnackbar.SnackbarPackage;
 import com.evollu.react.fcm.FIRMessagingPackage;
 import com.avishayil.rnrestart.ReactNativeRestartPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -30,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new SnackbarPackage(),
             new FIRMessagingPackage(),
             new ReactNativeRestartPackage(),
             new RNDeviceInfo(),

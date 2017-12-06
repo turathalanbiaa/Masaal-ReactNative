@@ -1,5 +1,4 @@
 import React , {Component} from 'react';
-import {I18nManager} from 'react-native';
 import {Container , Drawer as NSDrawer , Button , Icon} from 'native-base';
 import Header from "../component/general/header/Header";
 import Drawer from './../component/drawer/Drawer';
@@ -10,11 +9,6 @@ export default class Screen extends Component
     constructor(props)
     {
         super(props);
-    }
-
-    componentWillMount()
-    {
-        // I18nManager.forceRTL(Setting.isRTL());
     }
 
     closeDrawer = () =>

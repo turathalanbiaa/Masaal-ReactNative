@@ -7,8 +7,8 @@ import Http from "../../utils/networking/Http";
 import Link from "../../constant/Link";
 import FCM from 'react-native-fcm';
 import Setting from "../../constant/Setting";
-import Toaster from "../../utils/ui/Toaster";
 import {NavigationActions} from 'react-navigation';
+import Snackbar from 'react-native-snackbar';
 
 let nameInput;
 
@@ -33,12 +33,12 @@ export default class Setup extends Component
     componentWillMount()
     {
         let local = DeviceInfo.getDeviceLocale();
-        if (local === "fr")
+        if (local.includes("fr"))
         {
             this.setFr();
             this.setState({initialLang : 'fr'});
         }
-        else if(local === "en")
+        else if(local.includes("en"))
         {
             this.setEn();
             this.setState({initialLang : 'en'});
@@ -91,7 +91,12 @@ export default class Setup extends Component
         }).catch(() =>
         {
             this.setState({sending : false});
-            Toaster.show(this.state.errorSendMessage , 'danger');
+
+            Snackbar.show({
+                title: this.state.errorSendMessage,
+                duration: Snackbar.LENGTH_LONG,
+                backgroundColor : '#E91E63'
+            });
         });
     };
 
@@ -124,7 +129,6 @@ export default class Setup extends Component
                             :
                             <Button full rounded onPress={this.save} style={{marginTop: 20}}><Text>{this.state.saveButton}</Text></Button>
                     }
-
 
                 </Content>
 

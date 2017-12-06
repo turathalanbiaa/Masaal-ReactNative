@@ -1,5 +1,5 @@
 import React from 'react';
-import {View , I18nManager} from 'react-native';
+import {View} from 'react-native';
 import Screen from './Screen';
 import {connect} from 'react-redux';
 import String from './../../res/string/String';

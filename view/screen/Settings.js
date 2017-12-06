@@ -7,7 +7,7 @@ import Setting from "../../constant/Setting";
 import Http from "../../utils/networking/Http";
 import Link from "../../constant/Link";
 import DeviceInfo from 'react-native-device-info';
-import Toaster from "../../utils/ui/Toaster";
+import Snackbar from 'react-native-snackbar';
 
 let nameInput = null;
 
@@ -32,7 +32,11 @@ export default class Settings extends Screen
 
         if (name === "")
         {
-            Toaster.show(String.name_empty , 'danger');
+            Snackbar.show({
+                title: String.name_empty,
+                duration: Snackbar.LENGTH_LONG,
+                backgroundColor : '#E91E63'
+            });
             return;
         }
 
@@ -48,17 +52,29 @@ export default class Settings extends Screen
             if (response.success)
             {
                 Setting.changeName(name);
-                Toaster.show(String.name_has_been_changed , 'success')
+                Snackbar.show({
+                    title: String.name_has_been_changed,
+                    duration: Snackbar.LENGTH_LONG,
+                    backgroundColor : '#009688'
+                });
             }
             else
             {
-                Toaster.show(String.name_didnot_changed_check_your_internet_connection , 'danger')
+                Snackbar.show({
+                    title: String.name_didnot_changed_check_your_internet_connection,
+                    duration: Snackbar.LENGTH_LONG,
+                    backgroundColor : '#E91E63'
+                });
             }
 
             this.setState({sending : false});
         }).catch(() =>
         {
-            Toaster.show(String.name_didnot_changed_check_your_internet_connection , 'danger');
+            Snackbar.show({
+                title: String.name_didnot_changed_check_your_internet_connection,
+                duration: Snackbar.LENGTH_LONG,
+                backgroundColor : '#E91E63'
+            });
             this.setState({sending : false});
         });
 
