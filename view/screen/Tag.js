@@ -7,7 +7,6 @@ import TagList from "../component/tag/TagList";
 import {getTags} from "../../redux/actions/tagActions";
 import Setting from "../../constant/Setting";
 
-
 class Tag extends Screen
 {
 
@@ -28,7 +27,6 @@ class Tag extends Screen
         let lang = Setting.getCurrentLanguage();
         this.props.dispatch(getTags(lang , this.props.requestId));
     };
-
 
     renderContent()
     {

@@ -9,6 +9,7 @@ import FCM from 'react-native-fcm';
 import Setting from "../../constant/Setting";
 import {NavigationActions} from 'react-navigation';
 import Snackbar from 'react-native-snackbar';
+import LanguageRadio from './../component/general/LanguageRadio'
 
 let nameInput;
 
@@ -88,8 +89,9 @@ export default class Setup extends Component
 
             } , 1500);
 
-        }).catch(() =>
+        }).catch((e) =>
         {
+            console.log(e);
             this.setState({sending : false});
 
             Snackbar.show({
@@ -99,6 +101,12 @@ export default class Setup extends Component
             });
         });
     };
+
+    onLanguageChanged = (lang) =>
+    {
+        Setting.changeLang(lang);
+    };
+
 
     render()
     {
@@ -120,6 +128,8 @@ export default class Setup extends Component
                                 autoCapitalize="none" editable={!this.props.sending} autoCorrect={false} multiline={true}
                             />
                         </Item>
+
+                        <LanguageRadio initial={Setting.getCurrentLanguage()} onPress={this.onLanguageChanged}/>
 
                     </Form>
 

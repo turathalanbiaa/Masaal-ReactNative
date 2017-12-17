@@ -8,7 +8,6 @@ import QuestionText from "./QuestionText";
 import QuestionActions from "./QuestionActions";
 import Divider from './../general/Divider';
 import ViewShot from 'react-native-view-shot';
-import RNFS from 'react-native-fs';
 import Link from './../../../constant/Link';
 import Share from 'react-native-share';
 import QuestionStorage from "../../../utils/storage/QuestionStorage";
@@ -21,21 +20,6 @@ export default class Question extends PureComponent
         this.state = {bookmark : this.props.question.bookmark};
     }
 
-    onCapturePressed = () =>
-    {
-        this.viewShot.capture().then(uri =>
-        {
-            console.log("image saved ", uri);
-
-            let destination = RNFS.DocumentDirectoryPath + "/" + this.props.question.id + ".jpg";
-            RNFS.moveFile(uri , destination).then(() =>
-            {
-                console.log('moved to : ' + destination);
-            });
-
-        });
-    };
-
     onSharePressed = () =>
     {
         let shareOptions = {
@@ -45,7 +29,7 @@ export default class Question extends PureComponent
             subject: String.app_name
         };
 
-        Share.open(shareOptions);
+        Share.open(shareOptions).catch(() => {});
     };
 
     onBookmarkPressed = () =>
@@ -89,7 +73,7 @@ export default class Question extends PureComponent
 
                     <QuestionActions
                         onBookmarkPressed={this.onBookmarkPressed}
-                        onCapturePressed={this.onCapturePressed}
+                        // onCapturePressed={this.onCapturePressed}
                         onSharePressed={this.onSharePressed}
                         bookmark={this.state.bookmark}
                         videoLink={question.videoLink}
@@ -116,6 +100,7 @@ export default class Question extends PureComponent
             </View>
         )
     }
+
 }
 
 const styles = StyleSheet.create({

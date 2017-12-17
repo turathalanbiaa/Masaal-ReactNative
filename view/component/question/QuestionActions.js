@@ -29,9 +29,9 @@ export default class QuestionActions extends Component
                     <Icon name='md-share' />
                 </Button>
 
-                <Button small transparent onPress={this.props.onCapturePressed}>
-                    <Icon name='md-image' />
-                </Button>
+                {/*<Button small transparent onPress={this.props.onCapturePressed}>*/}
+                    {/*<Icon name='md-image' />*/}
+                {/*</Button>*/}
 
                 {
                     (this.props.videoLink !== null && this.props.videoLink !== "")  &&

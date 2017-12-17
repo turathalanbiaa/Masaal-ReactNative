@@ -8,6 +8,7 @@ import Http from "../../utils/networking/Http";
 import Link from "../../constant/Link";
 import DeviceInfo from 'react-native-device-info';
 import Snackbar from 'react-native-snackbar';
+import LanguageRadio from './../component/general/LanguageRadio';
 
 let nameInput = null;
 
@@ -80,6 +81,11 @@ export default class Settings extends Screen
 
     };
 
+    onLanguageChanged = (lang) =>
+    {
+        Setting.changeLang(lang);
+    };
+
     renderContent()
     {
         return (
@@ -106,6 +112,8 @@ export default class Settings extends Screen
                                     }
                                 </Button>
                     </View>
+
+                    <LanguageRadio initial={Setting.getCurrentLanguage()} onPress={this.onLanguageChanged}/>
 
                 </Form>
 

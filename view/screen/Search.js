@@ -9,6 +9,8 @@ import AqeadCategoryPicker from "../component/question/AqeadCategoryPicker";
 import QuestionTypeRadio from "../component/question/QuestionTypeRadio";
 import Setting from "../../constant/Setting";
 
+let opening = false;
+
 class Search extends Screen
 {
     constructor(props)
@@ -25,6 +27,13 @@ class Search extends Screen
 
     search = () =>
     {
+        console.log(opening);
+
+        if (opening)
+            return;
+
+        opening = true;
+
         if(this.state.category === null && this.state.text === "")
         {
             return;
@@ -32,6 +41,9 @@ class Search extends Screen
 
         let {navigate} = this.props.navigation;
         navigate('SearchResult' , {text : this.state.text , category : this.state.category});
+
+        setTimeout(() => {opening = false} , 1000);
+
     };
 
 

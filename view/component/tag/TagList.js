@@ -3,6 +3,7 @@ import {FlatList , View , Image , StyleSheet , Text , TouchableOpacity} from 're
 import {Button , Text as NBText , ListItem} from 'native-base'
 import String from './../../../res/string/String';
 
+let opening = false;
 export default class TagList extends Component
 {
 
@@ -13,8 +14,16 @@ export default class TagList extends Component
 
     showTags = (tagId) =>
     {
+        if (opening)
+            return;
+        opening = true;
+
         const {navigate} = this.props.navigation;
         navigate('SearchResult' , {tagId : tagId});
+
+        setTimeout(() => {
+            opening = false;
+        } , 2000);
     };
 
     render()

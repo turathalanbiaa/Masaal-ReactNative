@@ -42,7 +42,7 @@ class Bookmark extends Screen
 
     title = () =>
     {
-        return String.my_questions;
+        return String.question_bookmark;
     }
 
 }

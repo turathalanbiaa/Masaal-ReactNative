@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
         textAlign : 'left'
     },
     paragraph : {
-        textAlign : 'left',
         fontSize: 14 ,
         color : '#777777' ,
         fontFamily : 'JF Flat',

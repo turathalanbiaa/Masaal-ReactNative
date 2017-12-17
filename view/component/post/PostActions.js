@@ -17,9 +17,9 @@ export default class PostActions extends Component
                     <Icon name='md-share' />
                 </Button>
 
-                <Button small transparent onPress={this.props.onCapturePressed}>
-                    <Icon name='md-image' />
-                </Button>
+                {/*<Button small transparent onPress={this.props.onCapturePressed}>*/}
+                    {/*<Icon name='md-image' />*/}
+                {/*</Button>*/}
 
             </View>
         );

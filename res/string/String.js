@@ -27,6 +27,10 @@ let lang = {
         my_questions: "اسئلتي",
         search: "بحث",
         bookmark: "المحفوضات",
+
+        post_bookmark : "المنشورات المحفوظة" ,
+        question_bookmark : "الاسئلة المحفوظة",
+
         tags: "الاستفتائات",
         settings: "الاعدادات",
 
@@ -115,6 +119,10 @@ let lang = {
         my_questions: "My Questions",
         search: "Search",
         bookmark: "Bookmark",
+
+        post_bookmark : "Posts Bookmark" ,
+        question_bookmark : "Questions Bookmark",
+
         tags: "Tags",
         settings: "Settings",
 
@@ -204,6 +212,10 @@ let lang = {
         my_questions: "My Questions",
         search: "Search",
         bookmark: "Bookmark",
+
+        post_bookmark : "Posts Bookmark" ,
+        question_bookmark : "Questions Bookmark",
+
         tags: "Tags",
         settings: "Settings",
 

@@ -20,7 +20,7 @@ export default class PostHeader extends Component
                     <Text style={styles.primaryText}>{String.general_posts}</Text>
 
                     <View style={styles.infoFooterContainer}>
-                        <Text style={styles.secondaryText}>{this.formattedTime()}</Text>
+                        <Text style={styles.secondaryText}>{this.props.time}</Text>
                     </View>
 
                 </View>
@@ -29,17 +29,17 @@ export default class PostHeader extends Component
         );
     }
 
-    formattedTime = () =>
-    {
-        let time = TimeUtils.timeSince(new Date(this.props.time));
-        time = time.replace("$years$" , String.year);
-        time = time.replace("$month$" , String.month);
-        time = time.replace("$days$" , String.day);
-        time = time.replace("$hours$" , String.hour);
-        time = time.replace("$minutes$" , String.minute);
-        time = time.replace("$seconds$" , String.second);
-        return time;
-    }
+    // formattedTime = () =>
+    // {
+    //     let time = TimeUtils.timeSince(new Date(this.props.time));
+    //     time = time.replace("$years$" , String.year);
+    //     time = time.replace("$month$" , String.month);
+    //     time = time.replace("$days$" , String.day);
+    //     time = time.replace("$hours$" , String.hour);
+    //     time = time.replace("$minutes$" , String.minute);
+    //     time = time.replace("$seconds$" , String.second);
+    //     return time;
+    // }
 }
 
 const styles = StyleSheet.create({

@@ -12,6 +12,7 @@ import Tag from "./view/screen/Tag";
 import Bookmark from "./view/screen/Bookmark";
 import SplashScreen from "./view/screen/SplashScreen";
 import Setup from "./view/screen/Setup";
+import PostBookmark from "./view/screen/PostBookmark";
 
 const AppNavigation = StackNavigator({
     Splash : {screen : SplashScreen},
@@ -21,7 +22,8 @@ const AppNavigation = StackNavigator({
     SendQuestion : {screen : SendQuestionScreen} ,
     Search : {screen : Search} ,
     SearchResult : {screen : SearchResult} ,
-    Bookmark : {screen : Bookmark} ,
+    QuestionBookmark : {screen : Bookmark} ,
+    PostBookmark : {screen : PostBookmark} ,
     Tags : {screen : Tag} ,
     Settings : {screen : SettingsScreen},
     Setup : {screen : Setup}

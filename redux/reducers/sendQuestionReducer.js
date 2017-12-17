@@ -14,6 +14,8 @@ export default (state = initialState , action) =>
             return {sending : false  , success : true , complete : true};
         case 'SENDING_QUESTION_FAIL':
             return {sending : false  , success : false , complete : true};
+        case 'QUESTION_SENT':
+            return {sending : false  , success : false , complete : false};
     }
 
     return state;

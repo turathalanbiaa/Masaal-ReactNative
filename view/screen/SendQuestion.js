@@ -4,7 +4,7 @@ import String from './../../res/string/String';
 import {View} from 'react-native';
 import {Content, Item, Input, Text, Button, Form, Spinner} from 'native-base';
 import {connect} from 'react-redux';
-import {sendQuestion} from "../../redux/actions/questionActions";
+import {questionSent, sendQuestion} from "../../redux/actions/questionActions";
 import DeviceInfo from 'react-native-device-info';
 import QuestionTypeRadio from "../component/question/QuestionTypeRadio";
 import QuestionPrivacyRadio from "../component/question/QuestionPrivacyRadio";
@@ -50,8 +50,41 @@ class SendQuestion extends Screen
         return true;
     };
 
+    displayToasts = () =>
+    {
+        if (this.props.complete)
+        {
+            if (this.props.success)
+            {
+                Snackbar.show({
+                    title: String.question_sent,
+                    duration: Snackbar.LENGTH_LONG,
+                    backgroundColor : '#009688'
+                });
+
+                if (input !== null)
+                {
+                    input.setNativeProps({text: ''});
+                    input._root._lastNativeText = '';
+                }
+            }
+            else
+            {
+                Snackbar.show({
+                    title: String.question_didnot_sent,
+                    duration: Snackbar.LENGTH_LONG,
+                    backgroundColor : '#E91E63'
+                });
+            }
+
+            this.props.dispatch(questionSent());
+        }
+    };
+
     renderContent()
     {
+
+        this.displayToasts();
 
         return (
             <Content style={{padding: 8}}>
@@ -103,32 +136,6 @@ class SendQuestion extends Screen
 
 export default connect((store) =>
 {
-    if (store.sendQuestionReducer.complete)
-    {
-        if (store.sendQuestionReducer.success)
-        {
-            Snackbar.show({
-                title: String.question_sent,
-                duration: Snackbar.LENGTH_LONG,
-                backgroundColor : '#009688'
-            });
-
-            if (input !== null)
-            {
-                input.setNativeProps({text: ''});
-                input._root._lastNativeText = '';
-            }
-        }
-        else
-        {
-            Snackbar.show({
-                title: String.question_didnot_sent,
-                duration: Snackbar.LENGTH_LONG,
-                backgroundColor : '#E91E63'
-            });
-        }
-    }
-
     return {
         sending: store.sendQuestionReducer.sending,
         complete: store.sendQuestionReducer.complete,

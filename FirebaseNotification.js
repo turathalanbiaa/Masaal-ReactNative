@@ -7,6 +7,9 @@ import Link from "./constant/Link";
 import DeviceInfo from 'react-native-device-info';
 import Setting from "./constant/Setting";
 
+import Snackbar from 'react-native-snackbar';
+import String from './res/string/String';
+
 FCM.on(FCMEvent.Notification, async (notif) =>
 {
     // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
@@ -20,6 +23,7 @@ FCM.on(FCMEvent.Notification, async (notif) =>
         //iOS: app is open/resumed because user clicked banner
         //Android: app is open/resumed because user clicked banner or tapped app icon
     }
+
 
 
     // await someAsyncCall();
@@ -88,7 +92,16 @@ export default class FirebaseNotification extends Component
         this.notificationListener = FCM.on(FCMEvent.Notification, async (notif) =>
         {
             // optional, do some component related stuff
-            console.log('notificationListener', notif);
+            // console.log('notificationListener', notif);
+
+            if (notif && notif.type && parseInt(notif.type) === 5)
+            {
+                Snackbar.show({
+                    title: String.answer_to_your_question,
+                    duration: Snackbar.LENGTH_SHORT ,
+                    backgroundColor : '#5C6BC0'
+                });
+            }
         });
 
         // initial notification contains the notification that launchs the app. If user launchs app by clicking banner, the banner notification info will be here rather than through FCM.on event

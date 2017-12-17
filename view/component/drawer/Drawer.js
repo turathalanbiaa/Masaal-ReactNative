@@ -10,7 +10,7 @@ export default class Drawer extends Component
     {
         const {width} = Dimensions.get('window');
         return (
-            <View style={styles.container}>
+            <View style={[styles.container , this.props.style]}>
                 <Image source={require('./../../../res/image/images/drawer_header.jpg')} style={{width : '100%' , height : (width*0.80)*0.54}}/>
 
                 <ScrollView style={{flex : 1 , marginTop : 2}}>
@@ -25,7 +25,10 @@ export default class Drawer extends Component
 
                     <DrawerItem iconName="md-archive" title={String.my_questions} screenIndex={5} screen="MyQuestions" navigation={this.props.navigation}/>
                     <DrawerItem iconName="md-search" title={String.search} screenIndex={6} screen="Search" navigation={this.props.navigation}/>
-                    <DrawerItem iconName="md-bookmark" title={String.bookmark} screenIndex={7} screen="Bookmark" navigation={this.props.navigation}/>
+
+                    <DrawerItem iconName="md-bookmark" title={String.question_bookmark} screenIndex={7} screen="QuestionBookmark" navigation={this.props.navigation}/>
+                    <DrawerItem iconName="md-bookmark" title={String.post_bookmark} screenIndex={7} screen="PostBookmark" navigation={this.props.navigation}/>
+
                     <DrawerItem iconName="md-pricetag" title={String.tags} screenIndex={8} screen="Tags" navigation={this.props.navigation}/>
                     <DrawerItem iconName="md-settings" title={String.settings} screenIndex={9} screen="Settings" navigation={this.props.navigation}/>
 
@@ -36,6 +39,10 @@ export default class Drawer extends Component
     }
 
 }
+
+Drawer.defaultProps = {
+    style : {}
+};
 
 
 const styles = StyleSheet.create({

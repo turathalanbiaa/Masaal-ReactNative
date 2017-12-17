@@ -37,13 +37,16 @@ export default class PostStorage
 
     static async getPosts()
     {
-        let keys = await AsyncStorage.getAllKeys();
+        let keys = await PostStorage.getKeys();
+
         let postsAsString = await AsyncStorage.multiGet(keys);
         let posts = [];
 
-        for(let i=0;i<posts.length;i++)
+        console.log(postsAsString);
+
+        for(let i=0;i<postsAsString.length;i++)
         {
-            posts.push(JSON.parse(postsAsString[i]));
+            posts.push(JSON.parse(postsAsString[i][1]));
         }
 
         return posts;

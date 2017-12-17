@@ -11,7 +11,7 @@ export default (state = initialState, action) =>
 
     switch (action.type)
     {
-        case 'POST_FETCH_START'     :
+        case 'POST_FETCH_START':
             return {
                 ...state,
                 fetching: true,

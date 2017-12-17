@@ -26,7 +26,7 @@ export default class QuestionHeader extends Component
                     <Text style={styles.primaryText}>{name}</Text>
 
                     <View style={styles.infoFooterContainer}>
-                        <Text style={styles.secondaryText}>{this.formattedTime()}</Text>
+                        <Text style={styles.secondaryText}>{this.props.time}</Text>
                         <Text style={styles.secondaryText}>{this.props.category}</Text>
                     </View>
 
@@ -36,21 +36,21 @@ export default class QuestionHeader extends Component
         );
     }
 
-    formattedTime = () =>
-    {
-        let time = TimeUtils.timeSince(new Date(this.props.time));
-        time = time.replace("$years$" , String.year);
-        time = time.replace("$month$" , String.month);
-        time = time.replace("$days$" , String.day);
-        time = time.replace("$hours$" , String.hour);
-        time = time.replace("$minutes$" , String.minute);
-        time = time.replace("$seconds$" , String.second);
-
-        if (time.includes('NaN'))
-            return '';
-
-        return time;
-    }
+    // formattedTime = () =>
+    // {
+    //     let time = TimeUtils.timeSince(new Date(this.props.time));
+    //     time = time.replace("$years$" , String.year);
+    //     time = time.replace("$month$" , String.month);
+    //     time = time.replace("$days$" , String.day);
+    //     time = time.replace("$hours$" , String.hour);
+    //     time = time.replace("$minutes$" , String.minute);
+    //     time = time.replace("$seconds$" , String.second);
+    //
+    //     if (time.includes('NaN'))
+    //         return '';
+    //
+    //     return time;
+    // }
 }
 
 const styles = StyleSheet.create({

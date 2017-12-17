@@ -6,7 +6,6 @@ import String from '../../../res/string/String';
 import PostHeader from "./PostHeader";
 import PostsActions from "./PostActions";
 import ViewShot from 'react-native-view-shot';
-import RNFS from 'react-native-fs';
 import Link from './../../../constant/Link';
 import Share from 'react-native-share';
 import PostStorage from "../../../utils/storage/PostStorage";
@@ -20,20 +19,20 @@ export default class Post extends PureComponent
         this.state = {bookmark : this.props.post.bookmark};
     }
 
-    onCapturePressed = () =>
-    {
-        this.viewShot.capture().then(uri =>
-        {
-            console.log("image saved ", uri);
-
-            let destination = RNFS.DocumentDirectoryPath + "/" + "p_" + this.props.post.id + ".jpg";
-            RNFS.moveFile(uri , destination).then(() =>
-            {
-                console.log('moved to : ' + destination);
-            });
-
-        });
-    };
+    // onCapturePressed = () =>
+    // {
+    //     this.viewShot.capture().then(uri =>
+    //     {
+    //         console.log("image saved ", uri);
+    //
+    //         let destination = RNFS.DocumentDirectoryPath + "/" + "p_" + this.props.post.id + ".jpg";
+    //         RNFS.moveFile(uri , destination).then(() =>
+    //         {
+    //             console.log('moved to : ' + destination);
+    //         });
+    //
+    //     });
+    // };
 
     onSharePressed = () =>
     {
@@ -44,7 +43,7 @@ export default class Post extends PureComponent
             subject: String.app_name
         };
 
-        Share.open(shareOptions);
+        Share.open(shareOptions).catch(() => {});
     };
 
     onBookmarkPressed = () =>
@@ -82,7 +81,7 @@ export default class Post extends PureComponent
 
                     <PostHeader time={post.time}/>
 
-                    <H3 style={[styles.topDownSpace , {textAlign:'left'}]}>{post.title}</H3>
+                    <H3 style={[styles.topDownSpace , {textAlign:'left'}]}>{post.title.trim()}</H3>
                     <Divider/>
 
                     <Text selectable={true} style={[styles.topDownSpace , styles.paragraph]}>{post.content.trim()}</Text>
@@ -95,7 +94,7 @@ export default class Post extends PureComponent
                     <PostsActions
                         bookmark={this.state.bookmark}
                         onBookmarkPressed={this.onBookmarkPressed}
-                        onCapturePressed={this.onCapturePressed}
+                        // onCapturePressed={this.onCapturePressed}
                         onSharePressed={this.onSharePressed}
                     />
 
@@ -123,6 +122,5 @@ const styles = StyleSheet.create({
         fontSize: 14 ,
         color : '#777777' ,
         fontFamily : 'JF Flat',
-        textAlign : 'left'
     }
 });

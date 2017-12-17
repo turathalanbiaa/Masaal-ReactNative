@@ -79,3 +79,11 @@ export function sendQuestion(text , lang, type, privacy, uuid)
             })
     }
 }
+
+
+export function questionSent()
+{
+    return {
+        type : 'QUESTION_SENT'
+    }
+}

@@ -28,7 +28,29 @@ export function fetchRecentPosts(lang , type , offset = 0 , requestId)
             })
     }
 }
+export function getBookmark(requestId)
+{
+    return function (dispatch)
+    {
+        dispatch({type: 'POST_FETCH_START'});
 
+        PostStorage.getPosts().then((posts) =>
+        {
+            for (let i = 0; i < posts.length; i++)
+            {
+                posts[i].bookmark = true;
+            }
+
+            dispatch({
+                type: 'POST_FETCH_COMPLETE',
+                payload: {result: posts, requestId: requestId}
+            });
+        }).catch(() =>
+        {
+            dispatch({type: 'POST_FETCH_FAIL'});
+        });
+    }
+}
 
 async function fixPosts(posts)
 {

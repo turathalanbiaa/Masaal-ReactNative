@@ -37,11 +37,19 @@ export default class SplashScreen extends Component
             }
             else
             {
-                if (notif !== undefined && notif.type === "3")
+                console.log(notif);
+                if (notif !== undefined && notif.type)
                 {
-                    //todo : show screen according to type
                     const {navigate} = this.props.navigation;
-                    navigate('Posts', {type: 1});
+                    switch (parseInt(notif.type))
+                    {
+                        case 1:navigate('Home', {type : 1});break;
+                        case 2:navigate('Home', {type : 2});break;
+                        case 3:navigate('Posts', {type : 1});break;
+                        case 4:navigate('Posts', {type : 2});break;
+                        case 5:navigate('MyQuestions');break;
+                        case 6:navigate('Home', {type : 1});break;
+                    }
                 }
             }
         });
