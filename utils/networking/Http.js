@@ -16,6 +16,7 @@ export default class Http
                 reject();
             }, timeout);
 
+
             fetch(url, fetchOption)
                 .then(response =>
                 {

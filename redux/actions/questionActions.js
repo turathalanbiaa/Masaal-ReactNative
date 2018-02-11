@@ -49,6 +49,7 @@ export function searchByTag(tagId, requestId)
 
 export function sendQuestion(text , lang, type, privacy, uuid)
 {
+    console.log(uuid);
     return function (dispatch)
     {
         dispatch({type: 'SENDING_QUESTION_START'});

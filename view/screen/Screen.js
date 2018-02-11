@@ -20,7 +20,6 @@ export default class Screen extends Component
 
     openDrawer = () =>
     {
-        console.log(this.drawer);
         this.setState({open : true});
         this.drawer._root.open()
     };

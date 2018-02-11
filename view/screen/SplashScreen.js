@@ -100,7 +100,11 @@ export default class SplashScreen extends Component
                 }
 
                 {
-                    this.state.loadingSettingsDone && <Text style={{fontFamily : 'JF Flat' , fontSize : 20 , marginTop : 16}}>{String.app_name}</Text>
+                    this.state.loadingSettingsDone &&
+                    <View>
+                        <Text style={{fontFamily : 'JF Flat' , fontSize : 20 , marginTop : 16}}>{String.app_name}</Text>
+                        <Text style={{fontFamily : 'JF Flat' , fontSize : 20 , marginTop : 16}}>{String.in_feqh_and_aqead}</Text>
+                    </View>
                 }
 
             </View>

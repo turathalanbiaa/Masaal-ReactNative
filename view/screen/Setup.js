@@ -54,7 +54,13 @@ export default class Setup extends Component
     save = async () =>
     {
         let deviceUUID = DeviceInfo.getUniqueID();
-        let name = nameInput._root._lastNativeText.trim();
+
+        let name = nameInput._root._lastNativeText;
+        if(name === undefined)
+            name = '';
+        else
+            name = name.trim();
+
         let token = await FCM.getFCMToken();
 
         if (name === "")
@@ -65,6 +71,7 @@ export default class Setup extends Component
 
     setup = (deviceUUID , token , name) =>
     {
+        console.log(deviceUUID);
         let params = {
             deviceUUID : deviceUUID ,
             token : token ,
